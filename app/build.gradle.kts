@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
     kotlin("plugin.serialization")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -70,6 +72,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Navigation
     // Java language implementation
     implementation(libs.navigation.ui.v280beta04)
 
@@ -85,4 +88,21 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation(libs.androidx.navigation.compose.v280beta04)
+
+    //-------------
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    //-------------
+    // Room
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.room.compiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }

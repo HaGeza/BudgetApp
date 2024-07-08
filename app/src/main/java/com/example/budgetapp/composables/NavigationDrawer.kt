@@ -28,8 +28,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.budgetapp.Destination
 import com.example.budgetapp.composables.screens.SelectedScreen
+import com.example.budgetapp.navigation.Destination
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
