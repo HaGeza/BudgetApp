@@ -1,4 +1,4 @@
-package com.example.budgetapp.data;
+package com.example.budgetapp.data.model;
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

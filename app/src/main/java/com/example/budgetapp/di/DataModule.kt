@@ -1,7 +1,9 @@
-package com.example.budgetapp.data
+package com.example.budgetapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.budgetapp.data.dao.AccountDao
+import com.example.budgetapp.data.database.Database
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,17 +16,17 @@ import javax.inject.Singleton
 class DataModule {
     @Provides
     @Singleton
-    fun provideAccountDatabase(@ApplicationContext context: Context): AccountDatabase {
+    fun provideAccountDatabase(@ApplicationContext context: Context): Database {
         return Room.databaseBuilder(
             context,
-            AccountDatabase::class.java,
+            Database::class.java,
             "account_database"
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideAccountDao(database: AccountDatabase): AccountDao {
+    fun provideAccountDao(database: Database): AccountDao {
         return database.accountDao()
     }
 }

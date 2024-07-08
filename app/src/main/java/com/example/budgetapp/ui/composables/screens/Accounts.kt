@@ -1,4 +1,4 @@
-package com.example.budgetapp.composables.screens
+package com.example.budgetapp.ui.composables.screens
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -9,8 +9,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.budgetapp.data.Account
-import com.example.budgetapp.data.DataViewModel
+import com.example.budgetapp.data.model.Account
+import com.example.budgetapp.data.viewmodel.DataViewModel
 
 @Composable
 fun ShortAccountCard(modifier: Modifier, account: Account, navToDetails: (Int) -> Unit) {

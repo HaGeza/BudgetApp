@@ -1,4 +1,4 @@
-package com.example.budgetapp.composables.screens
+package com.example.budgetapp.ui.composables.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
