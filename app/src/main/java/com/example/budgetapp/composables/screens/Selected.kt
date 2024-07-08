@@ -1,4 +1,4 @@
-package com.example.budgetapp.screens
+package com.example.budgetapp.composables.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.example.budgetapp.Destination
 
 @Composable
 fun SelectedScreen(navController: NavHostController, modifier: Modifier) {

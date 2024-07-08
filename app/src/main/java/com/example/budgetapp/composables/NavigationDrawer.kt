@@ -1,4 +1,4 @@
-package com.example.budgetapp
+package com.example.budgetapp.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,8 +28,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.budgetapp.screens.Destination
-import com.example.budgetapp.screens.SelectedScreen
+import com.example.budgetapp.Destination
+import com.example.budgetapp.composables.screens.SelectedScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

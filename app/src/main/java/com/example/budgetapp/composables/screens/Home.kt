@@ -1,4 +1,4 @@
-package com.example.budgetapp.screens
+package com.example.budgetapp.composables.screens
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

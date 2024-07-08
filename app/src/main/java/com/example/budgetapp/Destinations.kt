@@ -1,4 +1,4 @@
-package com.example.budgetapp.screens
+package com.example.budgetapp
 
 import kotlinx.serialization.Serializable
 
