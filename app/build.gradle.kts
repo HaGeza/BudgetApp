@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -59,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.material)
+    implementation(libs.kotlinx.serialization.json.v171)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -68,19 +71,18 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Java language implementation
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui)
+    implementation(libs.navigation.ui.v280beta04)
 
     // Kotlin
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx.v280beta04)
+    implementation(libs.androidx.navigation.ui.ktx.v280beta04)
 
     // Feature module Support
-    implementation(libs.androidx.navigation.dynamic.features.fragment)
+    implementation(libs.androidx.navigation.dynamic.features.fragment.v280beta04)
 
     // Testing Navigation
-    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.androidx.navigation.testing.v280beta04)
 
     // Jetpack Compose Integration
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.compose.v280beta04)
 }

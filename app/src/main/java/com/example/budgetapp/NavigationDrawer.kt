@@ -27,42 +27,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.wear.compose.material.ContentAlpha
+import com.example.budgetapp.screens.Destination
+import com.example.budgetapp.screens.SelectedScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(modifier: Modifier) {
-    Text("Home Screen", modifier = modifier)
-}
-
-@Composable
-fun AccountsScreen(modifier: Modifier) {
-    Text("Accounts Screen", modifier = modifier)
-}
-
-@Composable
 fun DrawerButton(
-    text: String,
-    destination: String,
+    destination: Destination,
     navController: NavController,
     drawerState: DrawerState,
     scope: CoroutineScope
 ) {
-    val start = navController.currentBackStackEntryAsState().value?.destination?.route
-
-    val startIsDestination = start == destination
-    val buttonColors = if (startIsDestination) {
-        ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
-    } else {
-        ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onSurface.copy(alpha = ContentAlpha.medium))
-    }
-
     Button(
         onClick = {
             navController.navigate(destination)
@@ -72,9 +49,9 @@ fun DrawerButton(
         },
         modifier = Modifier.fillMaxWidth(),
         shape = RectangleShape,
-        colors = buttonColors
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
     ) {
-        Text(text)
+        Text(destination.name)
     }
 }
 
@@ -88,23 +65,10 @@ fun NavDrawerContent(
         Column {
             Text(text = "Title", modifier = Modifier.padding(16.dp))
             Divider()
-            DrawerButton("Home", "home", navController, drawerState, scope)
-            DrawerButton("Accounts", "accounts", navController, drawerState, scope)
+            DrawerButton(Destination.Home, navController, drawerState, scope)
+            DrawerButton(Destination.Accounts, navController, drawerState, scope)
         }
     }
-}
-
-@Composable
-fun SelectedScreen(navController: NavHostController, modifier: Modifier) {
-    NavHost(navController = navController, startDestination = "home") {
-        composable("home") {
-            HomeScreen(modifier)
-        }
-        composable("accounts") {
-            AccountsScreen(modifier)
-        }
-    }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
