@@ -1,16 +1,20 @@
 package com.example.budgetapp.ui.composables.screens
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.budgetapp.data.model.Account
 import com.example.budgetapp.data.viewmodel.DataViewModel
+import java.math.BigDecimal
+import java.util.Currency
 
 @Composable
 fun ShortAccountCard(modifier: Modifier, account: Account, navToDetails: (Int) -> Unit) {
@@ -26,11 +30,27 @@ fun ShortAccountCard(modifier: Modifier, account: Account, navToDetails: (Int) -
 }
 
 @Composable
+fun AccountsScreenWData(modifier: Modifier, accounts: List<Account>, navToDetails: (Int) -> Unit) {
+    LazyColumn(modifier = modifier) {
+        items(accounts.size) { index ->
+            ShortAccountCard(modifier, account = accounts[index], navToDetails)
+        }
+    }
+}
+
+@Composable
 fun AccountsScreen(modifier: Modifier, navToDetails: (Int) -> Unit) {
     val dataVM = hiltViewModel<DataViewModel>()
     val accounts = dataVM.getAccounts().collectAsState(initial = emptyList())
-    accounts.value.forEach() {
-        ShortAccountCard(modifier, account = it, navToDetails)
-    }
+    AccountsScreenWData(modifier, accounts.value, navToDetails)
+}
+
+@Preview
+@Composable
+fun AccountScreenPreview() {
+    AccountsScreenWData(modifier = Modifier, accounts = listOf(
+        Account(1, "Account 1", BigDecimal.valueOf(10050, 2), Currency.getInstance("USD")),
+        Account(2, "Account 2", BigDecimal.valueOf(20000, 2), Currency.getInstance("USD"))
+    ), navToDetails = { id: Int -> (print("Navigate to account $id details")) })
 }
 
