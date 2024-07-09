@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.budgetapp.data.model.Account
-import com.example.budgetapp.data.viewmodel.DataViewModel
+import com.example.budgetapp.data.viewmodel.AccountsViewModel
 import java.math.BigDecimal
 import java.util.Currency
 
@@ -44,8 +44,9 @@ fun AccountsScreenContentWData(
 
 @Composable
 fun AccountsScreenContent(navToDetails: (Int) -> Unit, modifier: Modifier) {
-    val dataVM = hiltViewModel<DataViewModel>()
-    val accounts = dataVM.getAccounts().collectAsState(initial = emptyList())
+    val accountsVM = hiltViewModel<AccountsViewModel>()
+    val accounts = accountsVM.getAll().collectAsState(initial = emptyList())
+    val deleteAccount = { account: Account -> accountsVM.delete(account) }
     AccountsScreenContentWData(accounts.value, navToDetails, modifier)
 }
 
@@ -68,6 +69,5 @@ fun AccountsScreen(topBar: @Composable () -> Unit, navToDetails: (Int) -> Unit) 
             AccountsScreenContent(navToDetails, modifier)
         },
         topBar = topBar,
-        fab = null,
     )
 }

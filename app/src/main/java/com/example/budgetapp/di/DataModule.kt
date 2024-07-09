@@ -16,17 +16,17 @@ import javax.inject.Singleton
 class DataModule {
     @Provides
     @Singleton
-    fun provideAccountDatabase(@ApplicationContext context: Context): Database {
+    fun provideDatabase(@ApplicationContext context: Context): Database {
         return Room.databaseBuilder(
             context,
             Database::class.java,
-            "account_database"
+            "budgetapp_database"
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideAccountDao(database: Database): AccountDao {
+    fun provideDao(database: Database): AccountDao {
         return database.accountDao()
     }
 }

@@ -1,16 +1,15 @@
 package com.example.budgetapp.data.dao
 
 import androidx.room.Dao
-import androidx.room.Insert
 import androidx.room.Query
 import com.example.budgetapp.data.model.Account
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface AccountDao {
+interface AccountDao : BaseDao<Account> {
     @Query("SELECT * FROM accounts ORDER BY name ASC")
-    fun getAll(): Flow<List<Account>>
+    override fun getAll(): Flow<List<Account>>
 
-    @Insert
-    suspend fun insert(account: Account)
+    @Query("SELECT * FROM accounts WHERE id = :id")
+    override fun get(id: Int): Flow<Account>
 }

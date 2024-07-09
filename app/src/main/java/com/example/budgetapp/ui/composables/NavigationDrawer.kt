@@ -114,11 +114,10 @@ fun NavigationDrawer() {
             }
             composable<Destination.Accounts> {
                 AccountsScreen(
-                    topBar,
-                    { id: Int ->
-                        navController.navigate(Destination.AccountDetails(id))
-                    }
-                )
+                    topBar
+                ) { id: Int ->
+                    navController.navigate(Destination.AccountDetails(id))
+                }
             }
             composable<Destination.AccountDetails> { backStackEntry ->
                 val account: Destination.AccountDetails = backStackEntry.toRoute()
