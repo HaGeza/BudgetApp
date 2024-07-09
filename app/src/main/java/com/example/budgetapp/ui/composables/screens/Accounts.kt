@@ -17,8 +17,8 @@ import java.math.BigDecimal
 import java.util.Currency
 
 @Composable
-fun ShortAccountCard(modifier: Modifier, account: Account, navToDetails: (Int) -> Unit) {
-    Card(modifier = modifier.padding(8.dp)) {
+fun ShortAccountCard(account: Account, navToDetails: (Int) -> Unit) {
+    Card(modifier = Modifier.padding(8.dp)) {
         Text(text = account.name)
         Text(text = "Balance: ${account.balance} ${account.currency.currencyCode}")
         Button(onClick = {
@@ -30,27 +30,44 @@ fun ShortAccountCard(modifier: Modifier, account: Account, navToDetails: (Int) -
 }
 
 @Composable
-fun AccountsScreenWData(modifier: Modifier, accounts: List<Account>, navToDetails: (Int) -> Unit) {
-    LazyColumn(modifier = modifier) {
+fun AccountsScreenContentWData(
+    accounts: List<Account>,
+    navToDetails: (Int) -> Unit,
+    modifier: Modifier,
+) {
+    LazyColumn(modifier) {
         items(accounts.size) { index ->
-            ShortAccountCard(modifier, account = accounts[index], navToDetails)
+            ShortAccountCard(account = accounts[index], navToDetails)
         }
     }
 }
 
 @Composable
-fun AccountsScreen(modifier: Modifier, navToDetails: (Int) -> Unit) {
+fun AccountsScreenContent(navToDetails: (Int) -> Unit, modifier: Modifier) {
     val dataVM = hiltViewModel<DataViewModel>()
     val accounts = dataVM.getAccounts().collectAsState(initial = emptyList())
-    AccountsScreenWData(modifier, accounts.value, navToDetails)
+    AccountsScreenContentWData(accounts.value, navToDetails, modifier)
 }
 
 @Preview
 @Composable
-fun AccountScreenPreview() {
-    AccountsScreenWData(modifier = Modifier, accounts = listOf(
-        Account(1, "Account 1", BigDecimal.valueOf(10050, 2), Currency.getInstance("USD")),
-        Account(2, "Account 2", BigDecimal.valueOf(20000, 2), Currency.getInstance("USD"))
-    ), navToDetails = { id: Int -> (print("Navigate to account $id details")) })
+fun AccountScreenContentPreview() {
+    AccountsScreenContentWData(
+        accounts = listOf(
+            Account(1, "Account 1", BigDecimal.valueOf(10050, 2), Currency.getInstance("USD")),
+            Account(2, "Account 2", BigDecimal.valueOf(20000, 2), Currency.getInstance("USD"))
+        ), navToDetails = { id: Int -> (print("Navigate to account $id details")) }, Modifier
+    )
 }
 
+
+@Composable
+fun AccountsScreen(topBar: @Composable () -> Unit, navToDetails: (Int) -> Unit) {
+    BaseScreen(
+        content = { modifier ->
+            AccountsScreenContent(navToDetails, modifier)
+        },
+        topBar = topBar,
+        fab = null,
+    )
+}

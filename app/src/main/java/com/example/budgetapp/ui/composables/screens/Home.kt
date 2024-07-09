@@ -2,10 +2,18 @@ package com.example.budgetapp.ui.composables.screens
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import com.example.budgetapp.ui.composables.ExpandableFab
 
 @Composable
-fun HomeScreen(modifier: Modifier) {
-    Text("Home Screen", modifier = modifier)
+fun HomeScreen(topBar: @Composable () -> Unit) {
+    BaseScreen(
+        content = { modifier ->
+            Text("Home Screen", modifier = modifier)
+        },
+        topBar = topBar,
+        fab = {
+            ExpandableFab()
+        },
+    )
 }
 

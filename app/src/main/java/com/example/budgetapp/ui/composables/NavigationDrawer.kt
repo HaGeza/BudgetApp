@@ -1,7 +1,6 @@
 package com.example.budgetapp.ui.composables
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -17,7 +16,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
@@ -27,9 +25,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.budgetapp.ui.composables.screens.SelectedScreen
+import androidx.navigation.toRoute
 import com.example.budgetapp.navigation.Destination
+import com.example.budgetapp.ui.composables.screens.AccountDetailsScreen
+import com.example.budgetapp.ui.composables.screens.AccountsScreen
+import com.example.budgetapp.ui.composables.screens.HomeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -71,43 +74,56 @@ fun NavDrawerContent(
     }
 }
 
+@Composable
 @OptIn(ExperimentalMaterial3Api::class)
+fun NavigationBar(drawerState: DrawerState, scope: CoroutineScope) {
+    TopAppBar(
+        navigationIcon = {
+            IconButton(onClick = {
+                scope.launch {
+                    drawerState.apply {
+                        if (isClosed) open() else close()
+                    }
+                }
+            }) {
+                Icon(
+                    Icons.Filled.Menu,
+                    contentDescription = "Open navigation drawer"
+                )
+            }
+        },
+        title = { Text("Budget App") }
+    )
+}
+
 @Composable
 fun NavigationDrawer() {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
+    val topBar: @Composable () -> Unit = { NavigationBar(drawerState, scope) }
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = { NavDrawerContent(navController, drawerState, scope) },
     ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            scope.launch {
-                                drawerState.apply {
-                                    if (isClosed) open() else close()
-                                }
-                            }
-                        }) {
-                            Icon(
-                                Icons.Filled.Menu,
-                                contentDescription = "Open navigation drawer"
-                            )
-                        }
-                    },
-                    title = { Text("Budget App") }
+        NavHost(navController = navController, startDestination = Destination.Home) {
+            composable<Destination.Home> {
+                HomeScreen(topBar)
+            }
+            composable<Destination.Accounts> {
+                AccountsScreen(
+                    topBar,
+                    { id: Int ->
+                        navController.navigate(Destination.AccountDetails(id))
+                    }
                 )
-            },
-            floatingActionButton = {
-                ExpandableFab()
-            },
-            modifier = Modifier.fillMaxSize()
-        ) { innerPadding ->
-            SelectedScreen(navController, Modifier.padding(innerPadding))
+            }
+            composable<Destination.AccountDetails> { backStackEntry ->
+                val account: Destination.AccountDetails = backStackEntry.toRoute()
+                AccountDetailsScreen(topBar, account.id)
+            }
         }
     }
 }

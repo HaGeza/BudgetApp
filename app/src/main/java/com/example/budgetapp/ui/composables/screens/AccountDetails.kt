@@ -1,7 +1,7 @@
 package com.example.budgetapp.ui.composables.screens
 
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Composable
 
-fun AccountDetailsScreen(id: Int, modifier: Modifier) {
+fun AccountDetailsScreen(topBar: @Composable () -> Unit, id: Int) {
     throw NotImplementedError("Account details screen not yet implemented!")
 }
