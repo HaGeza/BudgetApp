@@ -12,6 +12,9 @@ sealed class Destination(val route: String, val name: String) {
 
     @Serializable
     data class AccountDetails(val id: Int) :
-        Destination("/accounts/$id", "Account $id details")
+        Destination("/accounts/details/$id", "Account $id details")
+
+    @Serializable
+    object AccountCreation : Destination("/accounts/create", "Create Account")
 }
 

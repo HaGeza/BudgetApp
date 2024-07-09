@@ -30,9 +30,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.budgetapp.navigation.Destination
-import com.example.budgetapp.ui.composables.screens.AccountDetailsScreen
-import com.example.budgetapp.ui.composables.screens.AccountsScreen
 import com.example.budgetapp.ui.composables.screens.HomeScreen
+import com.example.budgetapp.ui.composables.screens.accounts.AccountCreationScreen
+import com.example.budgetapp.ui.composables.screens.accounts.AccountDetailsScreen
+import com.example.budgetapp.ui.composables.screens.accounts.AccountsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -114,14 +115,21 @@ fun NavigationDrawer() {
             }
             composable<Destination.Accounts> {
                 AccountsScreen(
-                    topBar
-                ) { id: Int ->
-                    navController.navigate(Destination.AccountDetails(id))
-                }
+                    topBar,
+                    navToDetails = { id: Int ->
+                        navController.navigate(Destination.AccountDetails(id))
+                    },
+                    navToCreate = {
+                        navController.navigate(Destination.AccountCreation)
+                    }
+                )
             }
             composable<Destination.AccountDetails> { backStackEntry ->
                 val account: Destination.AccountDetails = backStackEntry.toRoute()
                 AccountDetailsScreen(topBar, account.id)
+            }
+            composable<Destination.AccountCreation> {
+                AccountCreationScreen(topBar)
             }
         }
     }

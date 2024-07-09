@@ -1,9 +1,10 @@
-package com.example.budgetapp.ui.composables.screens
+package com.example.budgetapp.ui.composables.screens.accounts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.budgetapp.data.viewmodel.AccountsViewModel
+import com.example.budgetapp.ui.composables.screens.BaseScreen
 
 @Composable
 fun AccountDetailsScreenContent(id: Int, modifier: Modifier) {
