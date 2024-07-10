@@ -3,13 +3,9 @@ package com.example.budgetapp.ui.composables.screens.accounts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,18 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.budgetapp.data.model.Account
+import com.example.budgetapp.ui.composables.generic.SearchableSpinner
 import java.math.BigDecimal
 import java.util.Currency
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountForm(modifier: Modifier, onSave: (Account) -> Unit) {
-    var name by remember { mutableStateOf("") }
-    var selectedCurrency by remember { mutableStateOf(Currency.getInstance(Locale.getDefault())) }
-    var initialBalance by remember { mutableStateOf(BigDecimal.ZERO) }
+    val currencies = Currency.getAvailableCurrencies().toList()
 
-    val currencies = java.util.Currency.getAvailableCurrencies().toList()
+    var name by remember { mutableStateOf("") }
+    var selectedCurrency by remember { mutableStateOf(currencies[0]) }
+    var initialBalance by remember { mutableStateOf(BigDecimal.ZERO) }
 
     Column(modifier = modifier) {
         OutlinedTextField(
@@ -39,30 +35,8 @@ fun AccountForm(modifier: Modifier, onSave: (Account) -> Unit) {
             label = { Text("Name") }
         )
 
-        // TODO: dropdown not dropping down
-        ExposedDropdownMenuBox(
-            expanded = false,
-            onExpandedChange = { }
-        ) {
-            TextField(
-                value = selectedCurrency.currencyCode,
-                onValueChange = { },
-                readOnly = true,
-                label = { Text("Currency") },
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = false) }
-            )
-            ExposedDropdownMenu(
-                expanded = false,
-                onDismissRequest = { }
-            ) {
-                currencies.forEach { currency ->
-                    DropdownMenuItem(text = {
-                        Text(currency.currencyCode)
-                    }, onClick = {
-                        selectedCurrency = currency
-                    })
-                }
-            }
+        SearchableSpinner(options = currencies.map { it.currencyCode }) {
+            selectedCurrency = Currency.getInstance(it)
         }
 
         // TODO: application fails on non-integer or empty input

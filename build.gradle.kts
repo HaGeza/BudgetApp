@@ -8,9 +8,7 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.51.1" apply false
 }
 buildscript {
-    val hiltVersion = "2.51.1"
-
     dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
+        classpath(libs.hilt.android.gradle.plugin)
     }
 }
