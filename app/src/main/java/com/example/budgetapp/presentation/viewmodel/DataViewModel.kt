@@ -25,6 +25,12 @@ abstract class DataViewModel<T>(private val repository: Repository<T>) : ViewMod
         }
     }
 
+    fun update(entry: T) {
+        viewModelScope.launch {
+            repository.update(entry)
+        }
+    }
+
     fun delete(entry: T) {
         viewModelScope.launch {
             repository.delete(entry)

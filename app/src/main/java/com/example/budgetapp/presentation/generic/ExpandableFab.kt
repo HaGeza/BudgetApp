@@ -1,4 +1,4 @@
-package com.example.budgetapp.presentation
+package com.example.budgetapp.presentation.generic
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
