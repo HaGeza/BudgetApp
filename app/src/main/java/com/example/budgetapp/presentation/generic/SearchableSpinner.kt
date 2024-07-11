@@ -1,4 +1,4 @@
-package com.example.budgetapp.ui.composables.generic
+package com.example.budgetapp.presentation.generic
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size

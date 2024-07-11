@@ -1,4 +1,4 @@
-package com.example.budgetapp.ui.composables.screens
+package com.example.budgetapp.presentation.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

@@ -1,4 +1,4 @@
-package com.example.budgetapp.navigation
+package com.example.budgetapp.presentation.navigation
 
 import androidx.navigation.NavController
 

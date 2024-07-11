@@ -1,4 +1,4 @@
-package com.example.budgetapp.ui.composables.screens.accounts
+package com.example.budgetapp.presentation.screens.accounts
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
@@ -14,8 +14,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.budgetapp.data.model.Account
-import com.example.budgetapp.ui.composables.generic.SearchableSpinner
+import com.example.budgetapp.domain.model.Account
+import com.example.budgetapp.presentation.generic.SearchableSpinner
 import java.math.BigDecimal
 import java.util.Currency
 

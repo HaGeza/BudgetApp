@@ -1,6 +1,6 @@
-package com.example.budgetapp.di
+package com.example.budgetapp.data.di
 
-import com.example.budgetapp.data.repository.AccountsRepository
+import com.example.budgetapp.domain.repository.AccountsRepository
 import com.example.budgetapp.data.repository.LocalAccountsRepository
 import dagger.Binds
 import dagger.Module

@@ -1,10 +1,10 @@
-package com.example.budgetapp.data.viewmodel
+package com.example.budgetapp.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.budgetapp.data.model.Account
-import com.example.budgetapp.data.repository.AccountsRepository
-import com.example.budgetapp.data.repository.Repository
+import com.example.budgetapp.domain.model.Account
+import com.example.budgetapp.domain.repository.AccountsRepository
+import com.example.budgetapp.domain.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

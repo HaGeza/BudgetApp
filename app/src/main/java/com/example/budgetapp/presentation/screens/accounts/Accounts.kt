@@ -1,4 +1,4 @@
-package com.example.budgetapp.ui.composables.screens.accounts
+package com.example.budgetapp.presentation.screens.accounts
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.budgetapp.data.model.Account
-import com.example.budgetapp.data.viewmodel.AccountsViewModel
-import com.example.budgetapp.ui.composables.screens.BaseScreen
+import com.example.budgetapp.domain.model.Account
+import com.example.budgetapp.presentation.viewmodel.AccountsViewModel
+import com.example.budgetapp.presentation.screens.BaseScreen
 import java.math.BigDecimal
 import java.util.Currency
 

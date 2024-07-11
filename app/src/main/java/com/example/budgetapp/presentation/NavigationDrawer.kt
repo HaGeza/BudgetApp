@@ -1,4 +1,4 @@
-package com.example.budgetapp.ui.composables
+package com.example.budgetapp.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,11 +29,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.budgetapp.navigation.Destination
-import com.example.budgetapp.ui.composables.screens.HomeScreen
-import com.example.budgetapp.ui.composables.screens.accounts.AccountCreationScreen
-import com.example.budgetapp.ui.composables.screens.accounts.AccountDetailsScreen
-import com.example.budgetapp.ui.composables.screens.accounts.AccountsScreen
+import com.example.budgetapp.presentation.navigation.Destination
+import com.example.budgetapp.presentation.screens.HomeScreen
+import com.example.budgetapp.presentation.screens.accounts.AccountCreationScreen
+import com.example.budgetapp.presentation.screens.accounts.AccountDetailsScreen
+import com.example.budgetapp.presentation.screens.accounts.AccountsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

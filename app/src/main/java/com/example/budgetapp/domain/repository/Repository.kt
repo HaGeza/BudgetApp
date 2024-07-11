@@ -1,6 +1,6 @@
-package com.example.budgetapp.data.repository
+package com.example.budgetapp.domain.repository
 
-import com.example.budgetapp.data.model.Account
+import com.example.budgetapp.domain.model.Account
 import kotlinx.coroutines.flow.Flow
 
 interface Repository<T> {
