@@ -1,9 +1,13 @@
 package com.example.budgetapp.presentation.validation.state
 
-import com.example.budgetapp.presentation.validation.ValidationResult
+import com.example.budgetapp.domain.usecase.validator.ValidatedResult
 
 data class AccountFormState(
-    var nameResult: ValidationResult<String> = ValidationResult(""),
-    var currencyResult: ValidationResult<String> = ValidationResult("USD"),
-    var balanceResult: ValidationResult<Double> = ValidationResult(0.0),
-)
+    val nameResult: ValidatedResult<String> = ValidatedResult(null),
+    val currencyResult: ValidatedResult<String> = ValidatedResult(null),
+    val balanceResult: ValidatedResult<String> = ValidatedResult(null),
+) {
+    fun isValid(): Boolean {
+        return nameResult.error == null && currencyResult.error == null && balanceResult.error == null
+    }
+}
