@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchableSpinner(
     options: List<String>,
+    value: String,
     onOptionSelected: (String) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -55,7 +56,7 @@ fun SearchableSpinner(
     ) {
         TextField(
             modifier = Modifier.menuAnchor(),
-            value = "",
+            value = value,
             onValueChange = { },
             readOnly = true,
             label = { Text("Currency") },

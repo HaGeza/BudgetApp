@@ -2,7 +2,7 @@ package com.example.budgetapp.presentation.screens
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.example.budgetapp.presentation.ExpandableFab
+import com.example.budgetapp.presentation.generic.ExpandableFab
 
 @Composable
 fun HomeScreen(topBar: @Composable () -> Unit) {

@@ -1,4 +1,4 @@
-package com.example.budgetapp.presentation
+package com.example.budgetapp.presentation.generic
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

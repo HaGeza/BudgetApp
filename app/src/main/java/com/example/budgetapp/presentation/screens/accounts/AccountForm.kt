@@ -1,55 +1,70 @@
 package com.example.budgetapp.presentation.screens.accounts
 
+import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.budgetapp.domain.model.Account
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.budgetapp.presentation.generic.FieldWithErrorMessage
 import com.example.budgetapp.presentation.generic.SearchableSpinner
-import java.math.BigDecimal
+import com.example.budgetapp.presentation.viewmodel.AccountFormViewModel
+import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
 import java.util.Currency
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountForm(modifier: Modifier, onSave: (Account) -> Unit) {
+fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
     val currencies = Currency.getAvailableCurrencies().toList()
 
-    var name by remember { mutableStateOf("") }
-    var selectedCurrency by remember { mutableStateOf(currencies[0]) }
-    var initialBalance by remember { mutableStateOf(BigDecimal.ZERO) }
+    val accountFormVM = hiltViewModel<AccountFormViewModel>()
+    val formUIState = accountFormVM.formUIState
+    val context = LocalContext.current
 
-    Column(modifier = modifier) {
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Name") }
-        )
+    Column(modifier = modifier, verticalArrangement = Arrangement.Center) {
+        FieldWithErrorMessage(field = {
+            OutlinedTextField(
+                value = formUIState.name,
+                onValueChange = { accountFormVM.onNameChanged(it) },
+                label = { Text("Name") }
+            )
+        }, errorMessage = formUIState.nameError)
 
-        SearchableSpinner(options = currencies.map { it.currencyCode }) {
-            selectedCurrency = Currency.getInstance(it)
-        }
+        FieldWithErrorMessage(field = {
+            SearchableSpinner(
+                options = currencies.map { it.currencyCode },
+                value = formUIState.currency
+            ) {
+                accountFormVM.onCurrencyChanged(it)
+            }
+        }, errorMessage = formUIState.currencyError)
 
-        // TODO: application fails on non-integer or empty input
-        OutlinedTextField(
-            value = initialBalance.toString(),
-            onValueChange = { initialBalance = BigDecimal(it) },
-            label = { Text("Initial Balance") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-        )
+        FieldWithErrorMessage(field = {
+            OutlinedTextField(
+                value = formUIState.balance,
+                onValueChange = { accountFormVM.onBalanceChanged(it) },
+                label = { Text("Initial Balance") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
+        }, errorMessage = formUIState.balanceError)
 
-        // TODO: application does not navigate back on save
         Button(onClick = {
-            onSave(Account(name = name, balance = initialBalance, currency = selectedCurrency))
+            if (accountFormVM.onSubmit()) {
+                onSave(
+                    AccountUI(
+                        name = formUIState.name,
+                        balance = formUIState.balance,
+                        currency = formUIState.currency,
+                    )
+                )
+                Toast.makeText(context, "Account saved", Toast.LENGTH_SHORT).show()
+            }
         }) {
             Text("Save")
         }

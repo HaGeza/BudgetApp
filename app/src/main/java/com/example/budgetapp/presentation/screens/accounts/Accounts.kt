@@ -11,17 +11,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.budgetapp.domain.model.Account
-import com.example.budgetapp.presentation.viewmodel.AccountsViewModel
 import com.example.budgetapp.presentation.screens.BaseScreen
-import java.math.BigDecimal
-import java.util.Currency
+import com.example.budgetapp.presentation.viewmodel.AccountsViewModel
+import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
 
 @Composable
-fun ShortAccountCard(account: Account, navToDetails: ((Int) -> Unit)? = null) {
+fun ShortAccountCard(account: AccountUI, navToDetails: ((Int) -> Unit)? = null) {
     Card(modifier = Modifier.padding(8.dp)) {
         Text(text = account.name)
-        Text(text = "Balance: ${account.balance} ${account.currency.currencyCode}")
+        Text(text = "Balance: ${account.balance} ${account.currency}")
         Button(onClick = {
             navToDetails?.invoke(account.id)
         }) {
@@ -32,7 +30,7 @@ fun ShortAccountCard(account: Account, navToDetails: ((Int) -> Unit)? = null) {
 
 @Composable
 fun AccountsScreenContent(
-    accounts: List<Account>,
+    accounts: List<AccountUI>,
     modifier: Modifier,
     navToDetails: ((Int) -> Unit)? = null,
     navToCreate: (() -> Unit)? = null,
@@ -57,8 +55,8 @@ fun AccountsScreenContent(
 fun AccountScreenContentPreview() {
     AccountsScreenContent(
         accounts = listOf(
-            Account(1, "Account 1", BigDecimal.valueOf(10050, 2), Currency.getInstance("USD")),
-            Account(2, "Account 2", BigDecimal.valueOf(20000, 2), Currency.getInstance("USD"))
+            AccountUI(1, "Account 1", "105.00", "USD"),
+            AccountUI(2, "Account 2", "200.99", "USD")
         ), Modifier
     )
 }
