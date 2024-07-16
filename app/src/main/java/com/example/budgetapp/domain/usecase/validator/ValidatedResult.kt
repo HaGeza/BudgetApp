@@ -9,8 +9,6 @@ abstract class ValidationError
 
 class RequiredFieldError : ValidationError()
 
-class EmptyFieldError : ValidationError()
-
 class InvalidNumberError : ValidationError()
 
 class InvalidCurrencyError : ValidationError()

@@ -1,6 +1,5 @@
 package com.example.budgetapp.presentation.viewmodel.state
 
-import com.example.budgetapp.domain.usecase.validator.EmptyFieldError
 import com.example.budgetapp.domain.usecase.validator.InvalidCurrencyError
 import com.example.budgetapp.domain.usecase.validator.InvalidNumberError
 import com.example.budgetapp.domain.usecase.validator.RequiredFieldError
@@ -29,7 +28,7 @@ data class AccountFormUIState(
             balance = state.balanceResult.value ?: "",
 
             nameError = when (state.nameResult.error) {
-                is RequiredFieldError, is EmptyFieldError -> "Name is required"
+                is RequiredFieldError -> "Name is required"
                 null -> null
                 else -> "Error"
             },
