@@ -1,4 +1,4 @@
-package com.example.budgetapp.presentation.validation.state
+package com.example.budgetapp.presentation.viewmodel.state
 
 import com.example.budgetapp.domain.usecase.validator.ValidatedResult
 
