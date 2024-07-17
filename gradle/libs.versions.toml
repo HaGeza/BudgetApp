@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.1"
-hiltAndroid = "2.48"
+dexmakerMockito = "2.28.3"
+hiltAndroid = "2.51.1"
 hiltCompiler = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 hiltVersion = "2.51.1"
@@ -30,7 +31,8 @@ roomCommon = "2.6.1"
 roomCompiler = "2.6.1"
 roomKtx = "2.6.1"
 roomRuntime = "2.6.1"
-junitJunit = "4.12"
+junitJunit = "4.13.2"
+runner = "1.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +52,7 @@ androidx-navigation-ui-ktx-v280beta04 = { module = "androidx.navigation:navigati
 androidx-room-common = { module = "androidx.room:room-common", version.ref = "roomCommon" }
 androidx-room-compiler = { module = "androidx.room:room-compiler" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+dexmaker-mockito = { module = "com.linkedin.dexmaker:dexmaker-mockito", version.ref = "dexmakerMockito" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltVersion" }
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltVersion" }
@@ -78,6 +81,7 @@ navigation-ui-v280beta04 = { module = "androidx.navigation:navigation-ui", versi
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

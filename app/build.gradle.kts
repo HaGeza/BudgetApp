@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.material)
     implementation(libs.kotlinx.serialization.json.v171)
+    implementation(libs.androidx.runner)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)

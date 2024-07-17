@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface BaseDao<T> {
     fun getAll(): Flow<List<T>>
 
-    fun get(id: Int): Flow<T>
+    fun getById(id: Int): Flow<T?>
 
     @Insert
     suspend fun insert(entity: T)

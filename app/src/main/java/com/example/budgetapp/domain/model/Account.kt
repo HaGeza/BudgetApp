@@ -9,8 +9,8 @@ import java.util.Currency
 @Entity(tableName = "accounts")
 @TypeConverters(Converters::class)
 data class Account(
-    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     var name: String,
     var balance: BigDecimal,
-    var currency: Currency
+    var currency: Currency,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
 );

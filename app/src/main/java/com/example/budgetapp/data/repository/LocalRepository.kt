@@ -11,7 +11,7 @@ abstract class LocalRepository<T>(
     private val dao: BaseDao<T>
 ) : Repository<T> {
     override fun getAll() = dao.getAll()
-    override fun getById(id: Int) = dao.get(id)
+    override fun getById(id: Int) = dao.getById(id)
     override suspend fun insert(entry: T) = dao.insert(entry)
     override suspend fun update(entry: T) = dao.update(entry)
     override suspend fun delete(entry: T) = dao.delete(entry)

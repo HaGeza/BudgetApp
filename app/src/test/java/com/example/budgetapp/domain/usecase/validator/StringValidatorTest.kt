@@ -1,8 +1,10 @@
 package com.example.budgetapp.domain.usecase.validator
 
+import androidx.test.filters.SmallTest
 import org.junit.Before
 import org.junit.Test
 
+@SmallTest
 class StringValidatorTest {
     lateinit var requiredValidator: StringValidator
     lateinit var nonRequiredValidator: StringValidator
