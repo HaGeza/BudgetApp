@@ -2,6 +2,8 @@
 agp = "8.5.1"
 dexmakerMockito = "2.28.3"
 hiltAndroid = "2.51.1"
+hiltAndroidCompiler = "2.51.1"
+hiltAndroidTesting = "2.37"
 hiltCompiler = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 hiltVersion = "2.51.1"
@@ -33,6 +35,7 @@ roomKtx = "2.6.1"
 roomRuntime = "2.6.1"
 junitJunit = "4.13.2"
 runner = "1.6.1"
+truth = "1.4.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,10 +55,13 @@ androidx-navigation-ui-ktx-v280beta04 = { module = "androidx.navigation:navigati
 androidx-room-common = { module = "androidx.room:room-common", version.ref = "roomCommon" }
 androidx-room-compiler = { module = "androidx.room:room-compiler" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+compose-bom = { module = "androidx.compose:compose-bom" }
 dexmaker-mockito = { module = "com.linkedin.dexmaker:dexmaker-mockito", version.ref = "dexmakerMockito" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltVersion" }
+hilt-android-compiler-v237 = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltVersion" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
 hilt-android-v248 = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -82,6 +88,8 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

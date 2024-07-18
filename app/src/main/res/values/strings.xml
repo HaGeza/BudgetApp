@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Budget App</string>
+    <!-- FAB -->
+    <string name="fab_collapse">Collapse</string>
+    <string name="fab_expand">Expand</string>
+    <!-- Account Form -->
+    <string name="account_form_name_field_cd">Account Name Field</string>
+    <string name="account_form_name_field_placeholder">Account Name</string>
+    <string name="account_form_currency_selector_cd">Account Currency Selector</string>
+    <string name="account_form_currency_selector_text">Select Currency</string>
+    <string name="account_form_currency_search_cd">Account Currency Search</string>
+    <string name="account_form_currency_search_text">Search Currency</string>
+    <string name="account_form_balance_field_cd">Account Balance Field</string>
+    <string name="account_form_balance_field_placeholder">Initial Balance</string>
+    <string name="account_form_save_button_cd">Account Save Button</string>
+    <string name="account_form_save_button_text">Save</string>
 </resources>

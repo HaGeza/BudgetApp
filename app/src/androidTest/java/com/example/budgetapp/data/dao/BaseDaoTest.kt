@@ -22,7 +22,6 @@ import org.junit.runner.RunWith
 data class TestEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
-    val value: Int
 )
 
 @Dao
@@ -56,7 +55,7 @@ class BaseDaoTest {
         ).build()
         dao = db.dao()
 
-        entity1 = TestEntity(1, "Entity 1", 100)
+        entity1 = TestEntity(1, "Entity 1")
         dao.insert(entity1)
     }
 
@@ -67,7 +66,7 @@ class BaseDaoTest {
 
     @Test
     fun `insert adds new entity`() = runBlocking {
-        val entity2 = TestEntity(2, "Entity 2", 200)
+        val entity2 = TestEntity(2, "Entity 2")
         dao.insert(entity2)
 
         val entities = dao.getAll().first()
@@ -79,7 +78,7 @@ class BaseDaoTest {
 
     @Test
     fun `update modifies existing entity`() = runBlocking {
-        val updatedEntity = TestEntity(1, "Updated Entity 1", 200)
+        val updatedEntity = TestEntity(1, "Updated Entity 1")
         dao.update(updatedEntity)
 
         val entities = dao.getAll().first()

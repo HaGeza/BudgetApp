@@ -2,7 +2,6 @@ package com.example.budgetapp.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.budgetapp.Constants.Companion.DATABASE_NAME
 import com.example.budgetapp.data.dao.AccountDao
 import com.example.budgetapp.data.database.AppDatabase
 import dagger.Module
@@ -14,14 +13,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataModule {
+class TestDataModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(
+        return Room.inMemoryDatabaseBuilder(
             context,
             AppDatabase::class.java,
-            DATABASE_NAME
         ).build()
     }
 

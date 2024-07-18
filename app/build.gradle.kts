@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.budgetapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -66,16 +66,21 @@ dependencies {
     implementation(libs.kotlinx.serialization.json.v171)
     implementation(libs.androidx.runner)
 
+    // Local Testing
     testImplementation(libs.junit)
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.mockito.kotlin)
-    testImplementation(libs.mockk)
     testImplementation(libs.junit.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.truth)
 
+    // Instrumentation Testing
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    androidTestImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.navigation.testing.v280beta04)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -90,17 +95,14 @@ dependencies {
     // Feature module Support
     implementation(libs.androidx.navigation.dynamic.features.fragment.v280beta04)
 
-    // Testing Navigation
-    androidTestImplementation(libs.androidx.navigation.testing.v280beta04)
-
     // Jetpack Compose Integration
     implementation(libs.androidx.navigation.compose.v280beta04)
 
     //-------------
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.hilt.android.compiler)
 
     //-------------
     // Room
