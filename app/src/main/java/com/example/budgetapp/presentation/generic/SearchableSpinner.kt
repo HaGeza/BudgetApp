@@ -18,7 +18,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import com.example.budgetapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,6 +36,10 @@ fun SearchableSpinner(
 
     var query by remember { mutableStateOf("") }
     var filteredOptions by remember { mutableStateOf(options) }
+
+    val context = LocalContext.current
+    val currencySelectorCD = context.getString(R.string.account_form_currency_selector_cd)
+    val currencySearchCD = context.getString(R.string.account_form_currency_search_cd)
 
     val search = { newQuery: String ->
         if (newQuery != query) {
@@ -65,7 +73,10 @@ fun SearchableSpinner(
         )
         ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.semantics {
+                contentDescription = currencySelectorCD
+            }
         ) {
             Column(
                 modifier = Modifier.size(width = 200.dp, height = 300.dp),
@@ -76,7 +87,10 @@ fun SearchableSpinner(
                     onSearch = search,
                     active = expanded,
                     placeholder = { Text("Search") },
-                    onActiveChange = { }
+                    onActiveChange = { },
+                    modifier = Modifier.semantics {
+                        contentDescription = currencySearchCD
+                    }
                 ) {
                     LazyColumn(
                         userScrollEnabled = true,

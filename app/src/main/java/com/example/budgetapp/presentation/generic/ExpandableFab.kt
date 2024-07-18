@@ -17,12 +17,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.budgetapp.R
 
 @Composable
 fun ExpandableFab() {
     var isExpanded by remember { mutableStateOf(false) }
     val icon = if (isExpanded) Icons.Filled.Close else Icons.Filled.Add
+
+    val context = LocalContext.current
+    val fabExpand = context.getString(R.string.fab_expand)
+    val fabCollapse = context.getString(R.string.fab_collapse)
+
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -42,7 +49,7 @@ fun ExpandableFab() {
             }
         }
         FloatingActionButton(onClick = { isExpanded = !isExpanded }) {
-            Icon(icon, contentDescription = if (isExpanded) "Collapse" else "Expand")
+            Icon(icon, contentDescription = if (isExpanded) fabExpand else fabCollapse)
         }
     }
 }

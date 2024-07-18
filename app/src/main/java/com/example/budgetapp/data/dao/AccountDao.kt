@@ -11,5 +11,5 @@ interface AccountDao : BaseDao<Account> {
     override fun getAll(): Flow<List<Account>>
 
     @Query("SELECT * FROM accounts WHERE id = :id")
-    override fun get(id: Int): Flow<Account>
+    override fun getById(id: Int): Flow<Account?>
 }

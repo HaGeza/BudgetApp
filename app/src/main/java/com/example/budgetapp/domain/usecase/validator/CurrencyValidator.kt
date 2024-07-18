@@ -2,7 +2,7 @@ package com.example.budgetapp.domain.usecase.validator
 
 import java.util.Currency
 
-class CurrencyValidator(private val required: Boolean) : RequiredValidator<String>(required) {
+class CurrencyValidator(private val required: Boolean = true) : StringValidator(required) {
     operator override fun invoke(value: String?): ValidatedResult<String> {
         val result = super.invoke(value)
         if (result.error != null) {
@@ -10,7 +10,8 @@ class CurrencyValidator(private val required: Boolean) : RequiredValidator<Strin
         }
 
         return try {
-            ValidatedResult(value = Currency.getInstance(value).toString())
+            Currency.getInstance(value)
+            ValidatedResult(value = value)
         } catch (e: IllegalArgumentException) {
             ValidatedResult(error = InvalidCurrencyError())
         }

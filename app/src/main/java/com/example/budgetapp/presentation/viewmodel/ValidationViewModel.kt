@@ -5,15 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.budgetapp.domain.usecase.validator.CurrencyValidator
-import com.example.budgetapp.domain.usecase.validator.NonEmptyStringValidator
 import com.example.budgetapp.domain.usecase.validator.NumberValidator
+import com.example.budgetapp.domain.usecase.validator.StringValidator
 import com.example.budgetapp.presentation.viewmodel.state.AccountFormUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AccountFormViewModel @Inject constructor(
-    private val nameValidator: NonEmptyStringValidator,
+    private val nameValidator: StringValidator,
     private val balanceValidator: NumberValidator,
     private val currencyValidator: CurrencyValidator,
 ) : ViewModel() {

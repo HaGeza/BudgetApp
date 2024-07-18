@@ -10,9 +10,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.budgetapp.R.string.account_form_balance_field_cd
+import com.example.budgetapp.R.string.account_form_balance_field_placeholder
+import com.example.budgetapp.R.string.account_form_name_field_cd
+import com.example.budgetapp.R.string.account_form_name_field_placeholder
+import com.example.budgetapp.R.string.account_form_save_button_cd
+import com.example.budgetapp.R.string.account_form_save_button_text
 import com.example.budgetapp.presentation.generic.FieldWithErrorMessage
 import com.example.budgetapp.presentation.generic.SearchableSpinner
 import com.example.budgetapp.presentation.viewmodel.AccountFormViewModel
@@ -27,12 +35,23 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
     val formUIState = accountFormVM.formUIState
     val context = LocalContext.current
 
+    // String resources
+    val nameFieldCD = context.getString(account_form_name_field_cd)
+    val nameFieldPH = context.getString(account_form_name_field_placeholder)
+    val balanceFieldCD = context.getString(account_form_balance_field_cd)
+    val balanceFieldPH = context.getString(account_form_balance_field_placeholder)
+    val saveButtonCD = context.getString(account_form_save_button_cd)
+    val saveButtonText = context.getString(account_form_save_button_text)
+
     Column(modifier = modifier, verticalArrangement = Arrangement.Center) {
         FieldWithErrorMessage(field = {
             OutlinedTextField(
                 value = formUIState.name,
                 onValueChange = { accountFormVM.onNameChanged(it) },
-                label = { Text("Name") }
+                label = { Text(nameFieldPH) },
+                modifier = Modifier.semantics {
+                    contentDescription = nameFieldCD
+                }
             )
         }, errorMessage = formUIState.nameError)
 
@@ -49,8 +68,11 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
             OutlinedTextField(
                 value = formUIState.balance,
                 onValueChange = { accountFormVM.onBalanceChanged(it) },
-                label = { Text("Initial Balance") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                label = { Text(balanceFieldPH) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.semantics {
+                    contentDescription = balanceFieldCD
+                }
             )
         }, errorMessage = formUIState.balanceError)
 
@@ -65,8 +87,11 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
                 )
                 Toast.makeText(context, "Account saved", Toast.LENGTH_SHORT).show()
             }
-        }) {
-            Text("Save")
+        },
+            modifier = Modifier.semantics {
+                contentDescription = saveButtonCD
+            }) {
+            Text(saveButtonText)
         }
     }
 }

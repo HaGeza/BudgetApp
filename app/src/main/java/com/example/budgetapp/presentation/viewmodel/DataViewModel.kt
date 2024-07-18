@@ -22,8 +22,8 @@ abstract class DataViewModel<D, P>(private val repository: Repository<D>) : View
         return repository.getAll().map { list -> list.map(::domainToPresentation) }
     }
 
-    fun getById(id: Int): Flow<P> {
-        return repository.getById(id).map(::domainToPresentation)
+    fun getById(id: Int): Flow<P?> {
+        return repository.getById(id).map({ it?.let(::domainToPresentation) })
     }
 
     fun insert(entry: P) {

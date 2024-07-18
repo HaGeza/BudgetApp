@@ -1,8 +1,8 @@
 package com.example.budgetapp.domain.di
 
 import com.example.budgetapp.domain.usecase.validator.CurrencyValidator
-import com.example.budgetapp.domain.usecase.validator.NonEmptyStringValidator
 import com.example.budgetapp.domain.usecase.validator.NumberValidator
+import com.example.budgetapp.domain.usecase.validator.StringValidator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,19 +14,19 @@ import javax.inject.Singleton
 class ValidatorModule {
     @Provides
     @Singleton
-    fun provideNonEmptyStringValidator(): NonEmptyStringValidator {
-        return NonEmptyStringValidator(required = true)
+    fun provideRequiredStringValidator(): StringValidator {
+        return StringValidator(required = true)
     }
 
     @Provides
     @Singleton
-    fun provideNumberValidator(): NumberValidator {
+    fun provideRequiredNumberValidator(): NumberValidator {
         return NumberValidator(required = true)
     }
 
     @Provides
     @Singleton
-    fun provideCurrencyValidator(): CurrencyValidator {
+    fun provideRequiredCurrencyValidator(): CurrencyValidator {
         return CurrencyValidator(required = true)
     }
 }
