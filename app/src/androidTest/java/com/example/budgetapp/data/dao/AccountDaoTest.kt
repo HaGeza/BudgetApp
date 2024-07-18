@@ -1,41 +1,40 @@
 package com.example.budgetapp.data.dao
 
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import com.example.budgetapp.data.database.AppDatabase
+import com.example.budgetapp.data.di.DataModule
 import com.example.budgetapp.domain.model.Account
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import junit.framework.TestCase.assertNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.math.BigDecimal
 import java.util.Currency
+import javax.inject.Inject
 
-@Database(entities = [Account::class], version = 1, exportSchema = false)
-abstract class AccountDatabase : RoomDatabase() {
-    abstract fun accountDao(): AccountDao
-}
-
-@RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
+@UninstallModules(DataModule::class)
 @SmallTest
 class AccountDaoTest {
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+
+    @Inject
+    lateinit var db: AppDatabase
+
     private lateinit var dao: AccountDao
-    private lateinit var db: AccountDatabase
     private lateinit var account1: Account
     private lateinit var account2: Account
 
     @Before
     fun setUp() = runBlocking {
-        db = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            AccountDatabase::class.java,
-        ).build()
+        hiltRule.inject()
         dao = db.accountDao()
 
         account1 = Account(
