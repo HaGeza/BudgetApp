@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    name: Perform lint check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Run lint
+        run: ./gradlew lintDebug
+
+      - name: Upload html test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint.html
+          path: app/build/reports/lint-reults-debug.html
+
+  unit-test:
+    name: Perform unit testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run unit test
+        run: ./gradlew test
+
+      - name: Upload html test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_test_report
+          path: app/build/reports/test/testDebugUnitTest/
+
+  #  instrumentation-test:
+  #    name: Perform instrumentation testing
+  #    runs-on: macos-latest
+  #    steps:
+  #      - name: Checkout
+  #        uses: actions/checkout@v2
+  #
+  #      - name: Set up Java JDK v17
+  #        uses: actions/setup-java@v1
+  #        with:
+  #          java-version: '17'
+  #
+  #      - name: Run espresso tests
+  #        uses: reactivecircus/android-emulator-runner@v2 # 3rd party tool
+  #        with:
+  #          api-level: 29
+  #          script: ./gradlew connectedCheck
+  #
+  #      - name: Upload Instrumentation Test report
+  #        uses: actions/upload-artifact@v2
+  #        with:
+  #          name: instrumentation_test_report
+  #          path: app/build/reports/androidTests/connected
+
+#  static-code-analysis:
+#    name: Perform static code analysis
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout the code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up Java JDK 17
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: '17'
+#
+#      - name: SonarCloud Scan # sonarcloud properties in gradle.properties file
+#        run: ./gradlew app:sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
