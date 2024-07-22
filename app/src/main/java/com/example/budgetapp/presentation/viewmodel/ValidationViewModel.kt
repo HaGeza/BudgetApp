@@ -1,5 +1,6 @@
 package com.example.budgetapp.presentation.viewmodel
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,6 +10,7 @@ import com.example.budgetapp.domain.usecase.validator.NumberValidator
 import com.example.budgetapp.domain.usecase.validator.StringValidator
 import com.example.budgetapp.presentation.viewmodel.state.AccountFormUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 /**
@@ -22,6 +24,7 @@ class AccountFormViewModel @Inject constructor(
     private val nameValidator: StringValidator,
     private val balanceValidator: NumberValidator,
     private val currencyValidator: CurrencyValidator,
+    @ApplicationContext val context: Context,
 ) : ViewModel() {
     var formUIState by mutableStateOf(AccountFormUIState())
 
@@ -44,7 +47,7 @@ class AccountFormViewModel @Inject constructor(
             balanceResult = balanceValidator(formState.balanceResult.value),
             currencyResult = currencyValidator(formState.currencyResult.value),
         )
-        formUIState = formUIState.fromFormState(formState)
+        formUIState = formUIState.fromFormState(formState, context)
 
         return formState.isValid()
     }

@@ -19,7 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.budgetapp.R
+import com.example.budgetapp.R.string.fab_collapse
+import com.example.budgetapp.R.string.fab_expand
 
 @Composable
 fun ExpandableFab() {
@@ -27,8 +28,8 @@ fun ExpandableFab() {
     val icon = if (isExpanded) Icons.Filled.Close else Icons.Filled.Add
 
     val context = LocalContext.current
-    val fabExpand = context.getString(R.string.fab_expand)
-    val fabCollapse = context.getString(R.string.fab_collapse)
+    val fabExpand = context.getString(fab_expand)
+    val fabCollapse = context.getString(fab_collapse)
 
 
     Column(
