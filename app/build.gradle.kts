@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("org.sonarqube") version "5.1.0.4882"
 }
 
 android {
@@ -114,4 +115,12 @@ dependencies {
 
 kapt {
     correctErrorTypes = true
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "HaGeza_BudgetApp")
+        property("sonar.organization", "hageza")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
