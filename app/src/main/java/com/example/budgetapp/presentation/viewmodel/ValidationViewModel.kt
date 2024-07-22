@@ -11,6 +11,12 @@ import com.example.budgetapp.presentation.viewmodel.state.AccountFormUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+/**
+ * ViewModel for the account forms, for maintaining and validating the form state
+ * @param nameValidator - Validator for the account name
+ * @param balanceValidator - Validator for the account balance
+ * @param currencyValidator - Validator for the account currency
+ */
 @HiltViewModel
 class AccountFormViewModel @Inject constructor(
     private val nameValidator: StringValidator,

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Budget App</string>
+    <!-- Navigation -->
+    <string name="top_bar_title">Budget App</string>
+    <string name="navigation_drawer_button_cd">Open Navigation Drawer</string>
     <!-- FAB -->
     <string name="fab_collapse">Collapse</string>
     <string name="fab_expand">Expand</string>

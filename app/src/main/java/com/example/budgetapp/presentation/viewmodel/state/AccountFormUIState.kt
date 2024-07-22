@@ -5,6 +5,12 @@ import com.example.budgetapp.domain.usecase.validator.InvalidNumberError
 import com.example.budgetapp.domain.usecase.validator.RequiredFieldError
 import com.example.budgetapp.domain.usecase.validator.ValidatedResult
 
+/**
+ * Form state for the account creation form in the Presentation layer
+ * @param nameResult - Result of the account name validation
+ * @param currencyResult - Result of the account currency validation
+ * @param balanceResult - Result of the account balance validation
+ */
 data class AccountFormUIState(
     val name: String = "",
     val currency: String = "",
@@ -13,6 +19,10 @@ data class AccountFormUIState(
     val currencyError: String? = null,
     val balanceError: String? = null,
 ) {
+    /**
+     * Convert the form state to a Domain layer form state
+     * @return The Domain layer form state
+     */
     fun toFormState(): AccountFormState {
         return AccountFormState(
             nameResult = ValidatedResult(name),
@@ -21,7 +31,13 @@ data class AccountFormUIState(
         )
     }
 
+    /**
+     * Convert a Domain layer form state to a Presentation layer form state
+     * @param state - The Domain layer form state
+     * @return The Presentation layer form state
+     */
     fun fromFormState(state: AccountFormState): AccountFormUIState {
+        // TODO: use string resources for error messages
         return AccountFormUIState(
             name = state.nameResult.value ?: "",
             currency = state.currencyResult.value ?: "",
