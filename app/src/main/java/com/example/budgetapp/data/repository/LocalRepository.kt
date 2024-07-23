@@ -7,6 +7,7 @@ import com.example.budgetapp.domain.repository.AccountsRepository
 import com.example.budgetapp.domain.repository.Repository
 import javax.inject.Inject
 
+/** Base class for local repositories */
 abstract class LocalRepository<T>(
     private val dao: BaseDao<T>
 ) : Repository<T> {
@@ -17,6 +18,7 @@ abstract class LocalRepository<T>(
     override suspend fun delete(entry: T) = dao.delete(entry)
 }
 
+/** Local repository for accounts */
 class LocalAccountsRepository @Inject constructor(
     dao: AccountDao
 ) : LocalRepository<Account>(dao), AccountsRepository

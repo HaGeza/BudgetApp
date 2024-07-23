@@ -27,8 +27,13 @@ import com.example.budgetapp.presentation.viewmodel.AccountFormViewModel
 import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
 import java.util.Currency
 
+/**
+ * Form to create an account
+ * @param modifier - Modifier for the form
+ * @param onSubmit - Function to call when the form is submitted
+ */
 @Composable
-fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
+fun AccountForm(modifier: Modifier, onSubmit: (AccountUI) -> Unit) {
     val currencies = Currency.getAvailableCurrencies().toList()
 
     val accountFormVM = hiltViewModel<AccountFormViewModel>()
@@ -44,6 +49,7 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
     val saveButtonText = context.getString(account_form_save_button_text)
 
     Column(modifier = modifier, verticalArrangement = Arrangement.Center) {
+        // Name input field
         FieldWithErrorMessage(field = {
             OutlinedTextField(
                 value = formUIState.name,
@@ -55,6 +61,7 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
             )
         }, errorMessage = formUIState.nameError)
 
+        // Currency input field
         FieldWithErrorMessage(field = {
             SearchableSpinner(
                 options = currencies.map { it.currencyCode },
@@ -64,6 +71,7 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
             }
         }, errorMessage = formUIState.currencyError)
 
+        // Balance input field
         FieldWithErrorMessage(field = {
             OutlinedTextField(
                 value = formUIState.balance,
@@ -76,16 +84,17 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
             )
         }, errorMessage = formUIState.balanceError)
 
+        // Submit button
         Button(onClick = {
             if (accountFormVM.onSubmit()) {
-                onSave(
+                onSubmit(
                     AccountUI(
                         name = formUIState.name,
                         balance = formUIState.balance,
                         currency = formUIState.currency,
                     )
                 )
-                Toast.makeText(context, "Account saved", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "PLACEHOLDER Account saved", Toast.LENGTH_SHORT).show()
             }
         },
             modifier = Modifier.semantics {
@@ -96,6 +105,7 @@ fun AccountForm(modifier: Modifier, onSave: (AccountUI) -> Unit) {
     }
 }
 
+/** Preview for the AccountForm composable */
 @Composable
 @Preview
 fun AccountFormPreview() {

@@ -8,6 +8,7 @@ import com.example.budgetapp.presentation.generic.NavigationDrawer
 import com.example.budgetapp.ui.theme.BudgetAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/** Main activity of the application */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
