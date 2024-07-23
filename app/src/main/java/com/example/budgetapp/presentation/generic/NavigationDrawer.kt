@@ -23,12 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.budgetapp.R.string.navigation_drawer_button_cd
+import com.example.budgetapp.R.string.top_bar_title
 import com.example.budgetapp.presentation.navigation.Destination
 import com.example.budgetapp.presentation.screens.HomeScreen
 import com.example.budgetapp.presentation.screens.accounts.AccountCreationScreen
@@ -37,6 +40,13 @@ import com.example.budgetapp.presentation.screens.accounts.AccountsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+/**
+ * Button for the navigation drawer. Navigates to the `destination` when clicked.
+ * @param destination - Destination to navigate to
+ * @param navController - Navigation controller
+ * @param drawerState - State of the drawer
+ * @param scope - Coroutine scope
+ */
 @Composable
 fun DrawerButton(
     destination: Destination,
@@ -59,6 +69,12 @@ fun DrawerButton(
     }
 }
 
+/**
+ * Content of the navigation drawer
+ * @param navController - Navigation controller
+ * @param drawerState - State of the drawer
+ * @param scope - Coroutine scope
+ */
 @Composable
 fun NavDrawerContent(
     navController: NavController,
@@ -75,9 +91,18 @@ fun NavDrawerContent(
     }
 }
 
+/**
+ * Top app bar for the application
+ * @param drawerState - State of the drawer
+ * @param scope - Coroutine scope
+ * */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavigationBar(drawerState: DrawerState, scope: CoroutineScope) {
+    val context = LocalContext.current
+    val buttonCD = context.getString(navigation_drawer_button_cd)
+    val barTitle = context.getString(top_bar_title)
+
     TopAppBar(
         navigationIcon = {
             IconButton(onClick = {
@@ -89,14 +114,15 @@ fun NavigationBar(drawerState: DrawerState, scope: CoroutineScope) {
             }) {
                 Icon(
                     Icons.Filled.Menu,
-                    contentDescription = "Open navigation drawer"
+                    contentDescription = buttonCD
                 )
             }
         },
-        title = { Text("Budget App") }
+        title = { Text(barTitle) }
     )
 }
 
+/** Navigation drawer for the application */
 @Composable
 fun NavigationDrawer() {
     val navController = rememberNavController()
@@ -109,6 +135,7 @@ fun NavigationDrawer() {
         drawerState = drawerState,
         drawerContent = { NavDrawerContent(navController, drawerState, scope) },
     ) {
+        // Navigation graph
         NavHost(navController = navController, startDestination = Destination.Home) {
             composable<Destination.Home> {
                 HomeScreen(topBar)
@@ -134,4 +161,3 @@ fun NavigationDrawer() {
         }
     }
 }
-

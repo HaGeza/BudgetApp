@@ -6,6 +6,10 @@ import com.example.budgetapp.presentation.screens.BaseScreen
 import com.example.budgetapp.presentation.viewmodel.AccountsViewModel
 import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
 
+/**
+ * Screen to create a new account
+ * @param topBar - Top bar of the screen to show
+ */
 @Composable
 fun AccountCreationScreen(topBar: @Composable () -> Unit) {
     val accountsVM = hiltViewModel<AccountsViewModel>()
@@ -15,7 +19,7 @@ fun AccountCreationScreen(topBar: @Composable () -> Unit) {
         content = { modifier ->
             AccountForm(
                 modifier,
-                onSave = insertAccount
+                onSubmit = insertAccount
             )
         },
         topBar = topBar,

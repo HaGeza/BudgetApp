@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Budget App</string>
+    <!-- General input validation -->
+    <string name="input_required">This field is required</string>
+    <string name="input_number_invalid">Invalid number</string>
+    <string name="input_invalid">Invalid input</string>
+    <string name="input_internal_error">Internal error</string>
+    <!-- Navigation -->
+    <string name="top_bar_title">Budget App</string>
+    <string name="navigation_drawer_button_cd">Open Navigation Drawer</string>
     <!-- FAB -->
     <string name="fab_collapse">Collapse</string>
     <string name="fab_expand">Expand</string>
