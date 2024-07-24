@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.budgetapp.presentation.screens.BaseScreen
-import com.example.budgetapp.presentation.viewmodel.AccountsViewModel
+import com.example.budgetapp.presentation.viewmodel.dataVM.AccountsViewModel
 
 /**
  * PLACEHOLDER

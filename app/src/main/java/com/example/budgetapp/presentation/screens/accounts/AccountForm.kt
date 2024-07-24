@@ -1,6 +1,5 @@
 package com.example.budgetapp.presentation.screens.accounts
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.example.budgetapp.R
 import com.example.budgetapp.presentation.generic.FieldWithErrorMessage
 import com.example.budgetapp.presentation.generic.SearchableSpinner
-import com.example.budgetapp.presentation.viewmodel.AccountFormViewModel
+import com.example.budgetapp.presentation.viewmodel.validationVM.AccountFormViewModel
 import com.example.budgetapp.presentation.viewmodel.state.AccountFormUIState
 import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
 import java.util.Currency
@@ -34,12 +33,13 @@ import java.util.Currency
 /**
  * Form to create an account
  * @param modifier - Modifier for the form
- * @param onSubmit - Function to call when the form is submitted
+ * @param onSaveAccount - Function to call when the form is submitted
  */
 @Composable
 fun AccountForm(
     modifier: Modifier,
-    onSubmit: (AccountUI) -> Unit,
+    onSaveAccount: (AccountUI) -> Unit,
+    navBack: () -> Unit,
     accountFormVM: AccountFormViewModel?,
 ) {
     val currencies = Currency.getAvailableCurrencies().toList()
@@ -157,7 +157,7 @@ fun AccountForm(
             horizontalArrangement = Arrangement.End,
         ) {
             Button(
-                onClick = { /* Handle cancel action */ },
+                onClick = { navBack() },
                 modifier = Modifier
                     .semantics {
                         contentDescription = cancelButtonCD
@@ -172,14 +172,14 @@ fun AccountForm(
             Spacer(modifier = Modifier.width(16.dp))
             Button(onClick = {
                 if (onSubmit()) {
-                    onSubmit(
+                    onSaveAccount(
                         AccountUI(
                             name = formUIState.name,
                             balance = formUIState.balance,
                             currency = formUIState.currency,
                         )
                     )
-                    Toast.makeText(context, "PLACEHOLDER Account saved", Toast.LENGTH_SHORT).show()
+                    navBack()
                 }
             },
                 modifier = Modifier
@@ -197,5 +197,5 @@ fun AccountForm(
 @Composable
 @Preview
 fun AccountFormPreview() {
-    AccountForm(Modifier, { account -> val pass = account }, null)
+    AccountForm(Modifier, { }, { }, null)
 }

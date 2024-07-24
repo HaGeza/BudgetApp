@@ -1,4 +1,4 @@
-package com.example.budgetapp.presentation.viewmodel
+package com.example.budgetapp.presentation.viewmodel.validationVM
 
 import android.content.Context
 import androidx.compose.runtime.getValue

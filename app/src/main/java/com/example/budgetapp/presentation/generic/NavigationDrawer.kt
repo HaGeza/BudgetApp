@@ -156,7 +156,10 @@ fun NavigationDrawer() {
                 AccountDetailsScreen(topBar, account.id)
             }
             composable<Destination.AccountCreation> {
-                AccountCreationScreen(topBar)
+                AccountCreationScreen(
+                    topBar,
+                    navBack = { navController.popBackStack() }
+                )
             }
         }
     }
