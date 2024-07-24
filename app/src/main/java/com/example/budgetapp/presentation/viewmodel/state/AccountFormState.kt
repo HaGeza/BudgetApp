@@ -4,9 +4,9 @@ import com.example.budgetapp.domain.usecase.validator.ValidatedResult
 
 /**
  * Form state for the account creation form in the Domain layer
- * @param nameResult - Result of the account name validation
- * @param currencyResult - Result of the account currency validation
- * @param balanceResult - Result of the account balance validation
+ * @param nameResult Result of the account name validation
+ * @param currencyResult Result of the account currency validation
+ * @param balanceResult Result of the account balance validation
  */
 data class AccountFormState(
     val nameResult: ValidatedResult<String> = ValidatedResult(null),

@@ -1,10 +1,6 @@
 [versions]
 agp = "8.5.1"
-dexmakerMockito = "2.28.3"
-hiltAndroid = "2.51.1"
-hiltAndroidCompiler = "2.51.1"
 hiltAndroidTesting = "2.37"
-hiltCompiler = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 hiltVersion = "2.51.1"
 kotlin = "2.0.0"
@@ -12,23 +8,21 @@ coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.5.1"
-kotlinxSerializationJson = "1.6.3"
+kotlinxCoroutinesCore = "1.8.1"
+kotlinxCoroutinesTest = "1.8.1"
 kotlinxSerializationJsonVersion = "1.7.1"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2023.08.00"
-mockitoCore = "5.12.0"
-mockitoKotlin = "5.4.0"
 mockk = "1.13.12"
-navigationCompose = "2.8.0-beta04"
-navigationDynamicFeaturesFragment = "2.8.0-beta04"
-navigationFragment = "2.8.0-beta04"
-navigationFragmentKtx = "2.7.7"
+mockkAndroid = "1.12.3"
+navigationCompose = "2.8.0-beta05"
+navigationDynamicFeaturesFragment = "2.8.0-beta05"
 composeMaterial = "1.3.1"
-navigationFragmentKtxVersion = "2.8.0-beta04"
-navigationTesting = "2.8.0-beta04"
-navigationUiKtx = "2.8.0-beta04"
-navigationUiVersion = "2.8.0-beta04"
+navigationFragmentKtxVersion = "2.8.0-beta05"
+navigationTesting = "2.8.0-beta05"
+navigationUiKtx = "2.8.0-beta05"
+navigationUiVersion = "2.8.0-beta05"
 roomCommon = "2.6.1"
 roomCompiler = "2.6.1"
 roomKtx = "2.6.1"
@@ -40,30 +34,18 @@ truth = "1.4.4"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationFragmentKtx" }
 androidx-navigation-compose-v280beta04 = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-androidx-navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigationFragmentKtx" }
 androidx-navigation-dynamic-features-fragment-v280beta04 = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigationDynamicFeaturesFragment" }
-androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "navigationFragment" }
-androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-fragment-ktx-v280beta04 = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtxVersion" }
-androidx-navigation-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigationFragmentKtx" }
 androidx-navigation-testing-v280beta04 = { module = "androidx.navigation:navigation-testing", version.ref = "navigationTesting" }
-androidx-navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigationFragmentKtx" }
-androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx-v280beta04 = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtx" }
 androidx-room-common = { module = "androidx.room:room-common", version.ref = "roomCommon" }
-androidx-room-compiler = { module = "androidx.room:room-compiler" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
-compose-bom = { module = "androidx.compose:compose-bom" }
-dexmaker-mockito = { module = "com.linkedin.dexmaker:dexmaker-mockito", version.ref = "dexmakerMockito" }
+ext-junit = { module = "androidx.test.ext:junit" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltVersion" }
-hilt-android-compiler-v237 = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltVersion" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
-hilt-android-v248 = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -77,19 +59,18 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
 kotlinx-serialization-json-v171 = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockkAndroid" }
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockkAndroid" }
 navigation-ui-v280beta04 = { module = "androidx.navigation:navigation-ui", version.ref = "navigationUiVersion" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

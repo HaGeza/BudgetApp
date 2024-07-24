@@ -3,18 +3,17 @@ package com.example.budgetapp.presentation.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class Destination(val route: String, val name: String) {
+sealed class Destination(val route: String) {
     @Serializable
-    object Home : Destination("/", "Home")
+    object Home : Destination("/")
 
     @Serializable
-    object Accounts : Destination("/accounts", "Accounts")
+    object Accounts : Destination("/accounts")
 
     @Serializable
     data class AccountDetails(val id: Int) :
-        Destination("/accounts/details/$id", "Account $id details")
+        Destination("/accounts/details/$id")
 
     @Serializable
-    object AccountCreation : Destination("/accounts/create", "Create Account")
+    object AccountCreation : Destination("/accounts/create")
 }
-

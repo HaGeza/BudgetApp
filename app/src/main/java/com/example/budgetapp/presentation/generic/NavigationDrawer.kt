@@ -24,12 +24,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.budgetapp.R
 import com.example.budgetapp.R.string.navigation_drawer_button_cd
 import com.example.budgetapp.R.string.top_bar_title
 import com.example.budgetapp.presentation.navigation.Destination
@@ -42,38 +45,42 @@ import kotlinx.coroutines.launch
 
 /**
  * Button for the navigation drawer. Navigates to the `destination` when clicked.
- * @param destination - Destination to navigate to
- * @param navController - Navigation controller
- * @param drawerState - State of the drawer
- * @param scope - Coroutine scope
+ * @param navTo Function to call when button is pressed
+ * @param drawerState State of the drawer
+ * @param scope Coroutine scope
+ * @param title Text to display on the button
+ * @param cd Content description for the button
  */
 @Composable
 fun DrawerButton(
-    destination: Destination,
-    navController: NavController,
+    navTo: () -> Unit,
     drawerState: DrawerState,
-    scope: CoroutineScope
+    scope: CoroutineScope,
+    title: String,
+    cd: String,
 ) {
     Button(
         onClick = {
-            navController.navigate(destination)
+            navTo()
             if (drawerState.isOpen) scope.launch {
                 drawerState.close()
             }
         },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .semantics { contentDescription = cd },
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
     ) {
-        Text(destination.name)
+        Text(title)
     }
 }
 
 /**
  * Content of the navigation drawer
- * @param navController - Navigation controller
- * @param drawerState - State of the drawer
- * @param scope - Coroutine scope
+ * @param navController Navigation controller
+ * @param drawerState State of the drawer
+ * @param scope Coroutine scope
  */
 @Composable
 fun NavDrawerContent(
@@ -81,20 +88,34 @@ fun NavDrawerContent(
     drawerState: DrawerState,
     scope: CoroutineScope
 ) {
+    val context = LocalContext.current
+
     ModalDrawerSheet {
         Column {
             Text(text = "Title", modifier = Modifier.padding(16.dp))
             Divider()
-            DrawerButton(Destination.Home, navController, drawerState, scope)
-            DrawerButton(Destination.Accounts, navController, drawerState, scope)
+            DrawerButton(
+                { navController.navigate(Destination.Home) },
+                drawerState,
+                scope,
+                context.getString(R.string.navigation_drawer_home_title),
+                context.getString(R.string.navigation_drawer_home_cd),
+            )
+            DrawerButton(
+                { navController.navigate(Destination.Accounts) },
+                drawerState,
+                scope,
+                context.getString(R.string.navigation_drawer_accounts_title),
+                context.getString(R.string.navigation_drawer_accounts_cd),
+            )
         }
     }
 }
 
 /**
  * Top app bar for the application
- * @param drawerState - State of the drawer
- * @param scope - Coroutine scope
+ * @param drawerState State of the drawer
+ * @param scope Coroutine scope
  * */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

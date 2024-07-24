@@ -45,7 +45,7 @@ class AccountCreationScreenTest {
                     startDestination = Destination.AccountCreation
                 ) {
                     composable<Destination.AccountCreation> {
-                        AccountCreationScreen { null }
+                         AccountCreationScreen(topBar = { }, navBack = { })
                     }
                 }
             }

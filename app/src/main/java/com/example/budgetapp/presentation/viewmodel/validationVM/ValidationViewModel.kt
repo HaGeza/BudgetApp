@@ -15,9 +15,9 @@ import javax.inject.Inject
 
 /**
  * ViewModel for the account forms, for maintaining and validating the form state
- * @param nameValidator - Validator for the account name
- * @param balanceValidator - Validator for the account balance
- * @param currencyValidator - Validator for the account currency
+ * @param nameValidator Validator for the account name
+ * @param balanceValidator Validator for the account balance
+ * @param currencyValidator Validator for the account currency
  */
 @HiltViewModel
 class AccountFormViewModel @Inject constructor(
@@ -28,18 +28,34 @@ class AccountFormViewModel @Inject constructor(
 ) : ViewModel() {
     var formUIState by mutableStateOf(AccountFormUIState())
 
+    /**
+     * Update the name in the form state
+     * @param name The new name
+     */
     fun onNameChanged(name: String) {
         formUIState = formUIState.copy(name = name)
     }
 
+    /**
+     * Update the currency in the form state
+     * @param currency The new currency
+     */
     fun onCurrencyChanged(currency: String) {
         formUIState = formUIState.copy(currency = currency)
     }
 
+    /**
+     * Update the balance in the form state
+     * @param balance The new balance
+     */
     fun onBalanceChanged(balance: String) {
         formUIState = formUIState.copy(balance = balance)
     }
 
+    /**
+     * Submit the form, validating the form state
+     * @return `true` if the form is valid, `false` otherwise
+     */
     fun onSubmit(): Boolean {
         var formState = formUIState.toFormState()
         formState = formState.copy(

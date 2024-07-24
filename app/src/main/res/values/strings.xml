@@ -8,6 +8,10 @@
     <!-- Navigation -->
     <string name="top_bar_title">Budget App</string>
     <string name="navigation_drawer_button_cd">Open Navigation Drawer</string>
+    <string name="navigation_drawer_home_title">Home</string>
+    <string name="navigation_drawer_home_cd">Home Button</string>
+    <string name="navigation_drawer_accounts_title">Accounts</string>
+    <string name="navigation_drawer_accounts_cd">Accounts Button</string>
     <!-- FAB -->
     <string name="fab_collapse">Collapse</string>
     <string name="fab_expand">Expand</string>

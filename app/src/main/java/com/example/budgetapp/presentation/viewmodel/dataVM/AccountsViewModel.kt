@@ -1,6 +1,6 @@
 package com.example.budgetapp.presentation.viewmodel.dataVM
 
-import com.example.budgetapp.domain.constants.CurrencyDecimals.getDecimals
+import com.example.budgetapp.domain.constants.CurrencyDecimals
 import com.example.budgetapp.domain.model.Account
 import com.example.budgetapp.domain.repository.AccountsRepository
 import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
@@ -17,6 +17,12 @@ import javax.inject.Inject
 class AccountsViewModel @Inject constructor(
     repository: AccountsRepository
 ) : DataViewModel<Account, AccountUI>(repository) {
+    /**
+     * Converts [AccountUI] to [Account]. May throw [NumberFormatException] if `presentation.balance` is not correctly formatted or [IllegalArgumentException] if `presentation.currency` is not a valid currency code.
+     * @param presentation [AccountUI] to convert
+     * @return [Account] converted from [AccountUI]
+     * */
+    @Throws(NumberFormatException::class, IllegalArgumentException::class)
     override fun presentationToDomain(presentation: AccountUI): Account {
         return Account(
             name = presentation.name,
@@ -25,10 +31,17 @@ class AccountsViewModel @Inject constructor(
         )
     }
 
+    /**
+     * Converts [Account] to [AccountUI]. May throw [IllegalArgumentException] if `domain.currency.currencyCode` is not a supported currency code.
+     * @param domain [Account] to convert
+     * @return [AccountUI] converted from [Account]
+     * */
+    @Throws(IllegalArgumentException::class)
     override fun domainToPresentation(domain: Account): AccountUI {
         val currency = domain.currency.currencyCode
-        val decimals = getDecimals(currency)
-        val balance = domain.balance.setScale(decimals, RoundingMode.HALF_UP).toString()
+        val decimals = CurrencyDecimals.CURRENCIES_DECIMALS.get(currency)
+            ?: throw IllegalArgumentException("Currency not found: $currency")
+        val balance = domain.balance.setScale(decimals.toInt(), RoundingMode.FLOOR).toString()
 
         return AccountUI(
             id = domain.id,

@@ -9,7 +9,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import junit.framework.TestCase.assertNull
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -33,7 +33,7 @@ class AccountDaoTest {
     private lateinit var account2: Account
 
     @Before
-    fun setUp() = runBlocking {
+    fun setUp() = runTest {
         hiltRule.inject()
         dao = db.accountDao()
 
@@ -54,18 +54,18 @@ class AccountDaoTest {
     }
 
     @Test
-    fun `getById finds existing ids`() = runBlocking {
+    fun `getById finds existing ids`() = runTest {
         assert(dao.getById(1).first() == account1)
         assert(dao.getById(2).first() == account2)
     }
 
     @Test
-    fun `getById returns null for non-existing ids`() = runBlocking {
+    fun `getById returns null for non-existing ids`() = runTest {
         assertNull(dao.getById(3).first())
     }
 
     @Test
-    fun `getAll returns all accounts`() = runBlocking {
+    fun `getAll returns all accounts`() = runTest {
         val accounts = dao.getAll().first()
         assert(accounts.size == 2)
         assert(accounts.contains(account1))
