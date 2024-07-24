@@ -1,6 +1,6 @@
 package com.example.budgetapp.domain.usecase.validator
 
-import java.util.Currency
+import com.example.budgetapp.domain.constants.CurrencyCodes.CURRENCY_CODES
 
 /**
  * A validator for currency codes
@@ -19,10 +19,10 @@ class CurrencyValidator(private val required: Boolean = true) : StringValidator(
             return result
         }
 
-        return try {
-            Currency.getInstance(value)
+        // If the value is `null` at this point, it is not required, so `null` is always valid
+        return if (value == null || CURRENCY_CODES.contains(value)) {
             ValidatedResult(value = value)
-        } catch (e: IllegalArgumentException) {
+        } else {
             ValidatedResult(error = InvalidCurrencyError())
         }
     }

@@ -23,12 +23,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.budgetapp.R
+import com.example.budgetapp.domain.constants.CurrencyCodes.CURRENCY_CODES
 import com.example.budgetapp.presentation.generic.FieldWithErrorMessage
 import com.example.budgetapp.presentation.generic.SearchableSpinner
-import com.example.budgetapp.presentation.viewmodel.validationVM.AccountFormViewModel
 import com.example.budgetapp.presentation.viewmodel.state.AccountFormUIState
 import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
-import java.util.Currency
+import com.example.budgetapp.presentation.viewmodel.validationVM.AccountFormViewModel
 
 /**
  * Form to create an account
@@ -42,8 +42,6 @@ fun AccountForm(
     navBack: () -> Unit,
     accountFormVM: AccountFormViewModel?,
 ) {
-    val currencies = Currency.getAvailableCurrencies().toList()
-
     val formUIState = if (accountFormVM != null) {
         accountFormVM.formUIState
     } else {
@@ -105,7 +103,7 @@ fun AccountForm(
         // Currency input field
         FieldWithErrorMessage(field = {
             SearchableSpinner(
-                options = currencies.map { it.currencyCode },
+                options = CURRENCY_CODES,
                 value = formUIState.currency,
                 onOptionSelected = { accountFormVM?.onCurrencyChanged(it) },
                 dropdownModifier = Modifier
