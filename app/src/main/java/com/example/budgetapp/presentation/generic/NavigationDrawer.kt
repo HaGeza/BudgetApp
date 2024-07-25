@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -37,7 +38,7 @@ import com.example.budgetapp.R.string.navigation_drawer_button_cd
 import com.example.budgetapp.R.string.top_bar_title
 import com.example.budgetapp.presentation.navigation.Destination
 import com.example.budgetapp.presentation.screens.HomeScreen
-import com.example.budgetapp.presentation.screens.accounts.AccountCreationScreen
+import com.example.budgetapp.presentation.screens.accounts.AccountCreation
 import com.example.budgetapp.presentation.screens.accounts.AccountDetailsScreen
 import com.example.budgetapp.presentation.screens.accounts.AccountsScreen
 import kotlinx.coroutines.CoroutineScope
@@ -144,6 +145,7 @@ fun NavigationBar(drawerState: DrawerState, scope: CoroutineScope) {
 }
 
 /** Navigation drawer for the application */
+@Preview
 @Composable
 fun NavigationDrawer() {
     val navController = rememberNavController()
@@ -177,7 +179,7 @@ fun NavigationDrawer() {
                 AccountDetailsScreen(topBar, account.id)
             }
             composable<Destination.AccountCreation> {
-                AccountCreationScreen(
+                AccountCreation(
                     topBar,
                     navBack = { navController.popBackStack() }
                 )

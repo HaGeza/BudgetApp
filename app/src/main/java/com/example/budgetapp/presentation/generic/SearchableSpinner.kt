@@ -22,17 +22,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import com.example.budgetapp.Constants
+import com.example.budgetapp.R
 
 /**
  * Dropdown menu with a search bar to filter the options
  * @param options - List of options to display
  * @param value - The selected value
  * @param onOptionSelected - Function to call when an option is selected
- * @param dropdownText - Text to display in the top part of the dropdown
- * @param dropdownModifier - Modifier for the dropdown
+ * @param text - Text to display in the top part of the dropdown
+ * @param selectorModifier - Modifier for the dropdown
  * @param searchBarModifier - Modifier for the search bar
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,8 +45,9 @@ fun SearchableSpinner(
     options: List<String>,
     value: String,
     onOptionSelected: (String) -> Unit,
-    dropdownText: String,
-    dropdownModifier: Modifier = Modifier,
+    text: String,
+    modifier: Modifier = Modifier,
+    selectorModifier: Modifier = Modifier,
     searchBarModifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -51,6 +56,9 @@ fun SearchableSpinner(
 
     var query by remember { mutableStateOf("") }
     var filteredOptions by remember { mutableStateOf(options) }
+
+    val context = LocalContext.current
+    val searchPlaceholder = context.getString(R.string.searchable_spinner_search_placeholder)
 
     val search = { newQuery: String ->
         if (newQuery != query) {
@@ -71,7 +79,8 @@ fun SearchableSpinner(
 
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = { expanded = !expanded }
+        onExpandedChange = { expanded = !expanded },
+        modifier = modifier,
     ) {
         TextField(
             modifier = Modifier
@@ -81,14 +90,14 @@ fun SearchableSpinner(
             value = value,
             onValueChange = { },
             readOnly = true,
-            label = { Text(dropdownText) },
+            label = { Text(text) },
             trailingIcon = { TrailingIcon(expanded = expanded) },
             colors = ExposedDropdownMenuDefaults.textFieldColors(),
         )
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = dropdownModifier.exposedDropdownSize()
+            modifier = selectorModifier.exposedDropdownSize()
         ) {
             Column(
                 modifier = Modifier
@@ -99,9 +108,9 @@ fun SearchableSpinner(
                     onQueryChange = search,
                     onSearch = search,
                     active = expanded,
-                    placeholder = { Text("Search") },
+                    placeholder = { Text(searchPlaceholder) },
                     onActiveChange = { },
-                    modifier = searchBarModifier,
+                    modifier = searchBarModifier.testTag(Constants.SPINNER_SEARCH_BAR_TAG),
                 ) {
                     LazyColumn(
                         userScrollEnabled = true,
@@ -132,6 +141,6 @@ fun SearchableSpinnerPreview() {
         options = listOf("USD", "EUR", "GBP", "JPY", "CNY"),
         value = "USD",
         onOptionSelected = { },
-        dropdownText = "Currency",
+        text = "Currency",
     )
 }

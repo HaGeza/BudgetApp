@@ -15,11 +15,14 @@
     <!-- FAB -->
     <string name="fab_collapse">Collapse</string>
     <string name="fab_expand">Expand</string>
+    <!-- Searchable Spinner -->
+    <string name="searchable_spinner_search_placeholder">Search</string>
     <!-- Account Form -->
     <string name="account_form_name_field_cd">Account Name Field</string>
     <string name="account_form_name_field_placeholder">Account Name</string>
     <string name="account_form_name_field_error_cd">Account Name Field Error</string>
     <string name="account_form_currency_dropdown_text">Currency</string>
+    <string name="account_form_currency_dropdown_cd">Account Currency Dropdown</string>
     <string name="account_form_currency_selector_cd">Account Currency Selector</string>
     <string name="account_form_currency_selector_text">Select Currency</string>
     <string name="account_form_currency_selector_error_cd">Account Currency Selector Error</string>

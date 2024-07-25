@@ -32,15 +32,15 @@ import com.example.budgetapp.presentation.viewmodel.validationVM.AccountFormView
 
 /**
  * Form to create an account
- * @param modifier - Modifier for the form
- * @param onSaveAccount - Function to call when the form is submitted
+ * @param modifier Modifier for the form
+ * @param onSaveAccount Function to call when the form is submitted
  */
 @Composable
 fun AccountForm(
-    modifier: Modifier,
     onSaveAccount: (AccountUI) -> Unit,
     navBack: () -> Unit,
     accountFormVM: AccountFormViewModel?,
+    modifier: Modifier = Modifier,
 ) {
     val formUIState = if (accountFormVM != null) {
         accountFormVM.formUIState
@@ -59,6 +59,7 @@ fun AccountForm(
     val nameFieldPH = context.getString(R.string.account_form_name_field_placeholder)
     val nameFIeldErrorCD = context.getString(R.string.account_form_name_field_error_cd)
     val currencyDropdownText = context.getString(R.string.account_form_currency_dropdown_text)
+    val currencyDropdownCD = context.getString(R.string.account_form_currency_dropdown_cd)
     val currencySelectorCD = context.getString(R.string.account_form_currency_selector_cd)
     val currencySearchCD = context.getString(R.string.account_form_currency_search_cd)
     val currencyErrorCD = context.getString(R.string.account_form_currency_selector_error_cd)
@@ -106,7 +107,11 @@ fun AccountForm(
                 options = CURRENCY_CODES,
                 value = formUIState.currency,
                 onOptionSelected = { accountFormVM?.onCurrencyChanged(it) },
-                dropdownModifier = Modifier
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = currencyDropdownCD
+                    },
+                selectorModifier = Modifier
                     .semantics {
                         contentDescription = currencySelectorCD
                     },
@@ -114,7 +119,7 @@ fun AccountForm(
                     .semantics {
                         contentDescription = currencySearchCD
                     },
-                dropdownText = currencyDropdownText,
+                text = currencyDropdownText,
             )
         },
             errorMessage = formUIState.currencyError,
@@ -195,5 +200,5 @@ fun AccountForm(
 @Composable
 @Preview
 fun AccountFormPreview() {
-    AccountForm(Modifier, { }, { }, null)
+    AccountForm({ }, { }, null, Modifier)
 }
