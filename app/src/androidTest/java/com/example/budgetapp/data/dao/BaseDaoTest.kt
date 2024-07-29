@@ -12,7 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -48,7 +48,7 @@ class BaseDaoTest {
 
 
     @Before
-    fun setUp() = runBlocking {
+    fun setUp() = runTest {
         db = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             TestDatabase::class.java
@@ -65,7 +65,7 @@ class BaseDaoTest {
     }
 
     @Test
-    fun `insert adds new entity`() = runBlocking {
+    fun `insert adds new entity`() = runTest {
         val entity2 = TestEntity(2, "Entity 2")
         dao.insert(entity2)
 
@@ -77,7 +77,7 @@ class BaseDaoTest {
     }
 
     @Test
-    fun `update modifies existing entity`() = runBlocking {
+    fun `update modifies existing entity`() = runTest {
         val updatedEntity = TestEntity(1, "Updated Entity 1")
         dao.update(updatedEntity)
 
@@ -88,7 +88,7 @@ class BaseDaoTest {
     }
 
     @Test
-    fun `delete removes existing entity`() = runBlocking {
+    fun `delete removes existing entity`() = runTest {
         dao.delete(entity1)
 
         val entities = dao.getAll().first()

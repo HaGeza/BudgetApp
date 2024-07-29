@@ -66,18 +66,22 @@ dependencies {
     implementation(libs.androidx.compose.material)
     implementation(libs.kotlinx.serialization.json.v171)
     implementation(libs.androidx.runner)
+    implementation(libs.kotlinx.coroutines.core)
 
     // Local Testing
     testImplementation(libs.junit)
     testImplementation(libs.junit.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // Instrumentation Testing
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.android.compiler)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)

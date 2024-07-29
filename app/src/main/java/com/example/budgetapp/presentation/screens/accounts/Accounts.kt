@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.budgetapp.presentation.screens.BaseScreen
-import com.example.budgetapp.presentation.viewmodel.AccountsViewModel
+import com.example.budgetapp.presentation.viewmodel.dataVM.AccountsViewModel
 import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
 
 @Composable

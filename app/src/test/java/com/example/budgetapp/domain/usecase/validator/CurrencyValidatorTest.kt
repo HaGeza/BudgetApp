@@ -18,6 +18,7 @@ class CurrencyValidatorTest {
         assert(currencyValidator("a").error is InvalidCurrencyError)
         assert(currencyValidator("ab").error is InvalidCurrencyError)
         assert(currencyValidator("usd").error is InvalidCurrencyError)
+        assert(currencyValidator("LEL").error is InvalidCurrencyError)
         assert(currencyValidator("EURO").error is InvalidCurrencyError)
         assert(currencyValidator("89fda").error is InvalidCurrencyError)
         assert(currencyValidator(":----------)").error is InvalidCurrencyError)

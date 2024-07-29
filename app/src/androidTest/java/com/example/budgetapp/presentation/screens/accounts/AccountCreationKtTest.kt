@@ -25,7 +25,7 @@ import org.junit.Test
 
 @HiltAndroidTest
 @UninstallModules(DataModule::class)
-class AccountCreationScreenTest {
+class AccountCreationKtTest {
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
 
@@ -45,7 +45,7 @@ class AccountCreationScreenTest {
                     startDestination = Destination.AccountCreation
                 ) {
                     composable<Destination.AccountCreation> {
-                        AccountCreationScreen { null }
+                        AccountCreation(topBar = { }, navBack = { })
                     }
                 }
             }

@@ -12,9 +12,9 @@ import com.example.budgetapp.domain.usecase.validator.ValidatedResult
 
 /**
  * Form state for the account creation form in the Presentation layer
- * @param nameResult - Result of the account name validation
- * @param currencyResult - Result of the account currency validation
- * @param balanceResult - Result of the account balance validation
+ * @param nameResult Result of the account name validation
+ * @param currencyResult Result of the account currency validation
+ * @param balanceResult Result of the account balance validation
  */
 data class AccountFormUIState(
     val name: String = "",
@@ -38,8 +38,8 @@ data class AccountFormUIState(
 
     /**
      * Convert a Domain layer form state to a Presentation layer form state
-     * @param state - The Domain layer form state
-     * @param context - The Android context
+     * @param state The Domain layer form state
+     * @param context The Android context
      * @return The Presentation layer form state
      */
     fun fromFormState(state: AccountFormState, context: Context): AccountFormUIState {

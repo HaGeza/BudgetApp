@@ -1,9 +1,11 @@
 package com.example.budgetapp.presentation.generic
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -18,28 +20,45 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toSize
+import com.example.budgetapp.Constants
 import com.example.budgetapp.R
 
+/**
+ * Dropdown menu with a search bar to filter the options
+ * @param options - List of options to display
+ * @param value - The selected value
+ * @param onOptionSelected - Function to call when an option is selected
+ * @param text - Text to display in the top part of the dropdown
+ * @param selectorModifier - Modifier for the dropdown
+ * @param searchBarModifier - Modifier for the search bar
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchableSpinner(
     options: List<String>,
     value: String,
     onOptionSelected: (String) -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+    selectorModifier: Modifier = Modifier,
+    searchBarModifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var dropdownSize by remember { mutableStateOf(Size.Zero) }
     val dropdownState = rememberLazyListState()
 
     var query by remember { mutableStateOf("") }
     var filteredOptions by remember { mutableStateOf(options) }
 
     val context = LocalContext.current
-    val currencySelectorCD = context.getString(R.string.account_form_currency_selector_cd)
-    val currencySearchCD = context.getString(R.string.account_form_currency_search_cd)
+    val searchPlaceholder = context.getString(R.string.searchable_spinner_search_placeholder)
 
     val search = { newQuery: String ->
         if (newQuery != query) {
@@ -60,37 +79,38 @@ fun SearchableSpinner(
 
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = { expanded = !expanded }
+        onExpandedChange = { expanded = !expanded },
+        modifier = modifier,
     ) {
         TextField(
-            modifier = Modifier.menuAnchor(),
+            modifier = Modifier
+                .menuAnchor()
+                .fillMaxWidth()
+                .onGloballyPositioned { dropdownSize = it.size.toSize() },
             value = value,
             onValueChange = { },
             readOnly = true,
-            label = { Text("Currency") },
+            label = { Text(text) },
             trailingIcon = { TrailingIcon(expanded = expanded) },
             colors = ExposedDropdownMenuDefaults.textFieldColors(),
         )
-        ExposedDropdownMenu(
+        DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier.semantics {
-                contentDescription = currencySelectorCD
-            }
+            modifier = selectorModifier.exposedDropdownSize()
         ) {
             Column(
-                modifier = Modifier.size(width = 200.dp, height = 300.dp),
+                modifier = Modifier
+                    .size(dropdownSize.width.dp, dropdownSize.height.dp.times(2))
             ) {
                 SearchBar(
                     query = query,
                     onQueryChange = search,
                     onSearch = search,
                     active = expanded,
-                    placeholder = { Text("Search") },
+                    placeholder = { Text(searchPlaceholder) },
                     onActiveChange = { },
-                    modifier = Modifier.semantics {
-                        contentDescription = currencySearchCD
-                    }
+                    modifier = searchBarModifier.testTag(Constants.SPINNER_SEARCH_BAR_TAG),
                 ) {
                     LazyColumn(
                         userScrollEnabled = true,
@@ -111,4 +131,16 @@ fun SearchableSpinner(
             }
         }
     }
+}
+
+/** Preview for [SearchableSpinner] */
+@Preview
+@Composable
+fun SearchableSpinnerPreview() {
+    SearchableSpinner(
+        options = listOf("USD", "EUR", "GBP", "JPY", "CNY"),
+        value = "USD",
+        onOptionSelected = { },
+        text = "Currency",
+    )
 }

@@ -17,8 +17,13 @@ class NumberValidator(private val required: Boolean = true) : StringValidator(re
             return result
         }
 
+        // If the value is `null` at this point, it is not required, so `null` is always valid
+        if (value == null) {
+            return ValidatedResult(value = value)
+        }
+
         return try {
-            value?.toDouble()
+            value.toDouble()
             ValidatedResult(value = value)
         } catch (e: NumberFormatException) {
             ValidatedResult(error = InvalidNumberError())
