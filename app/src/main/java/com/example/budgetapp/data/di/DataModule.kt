@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.budgetapp.Constants.Companion.DATABASE_NAME
 import com.example.budgetapp.data.dao.AccountDao
+import com.example.budgetapp.data.dao.ExchangeRateDao
 import com.example.budgetapp.data.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -40,5 +41,16 @@ class DataModule {
     @Singleton
     fun provideAccountDao(database: AppDatabase): AccountDao {
         return database.accountDao()
+    }
+
+    /**
+     * Provides the [ExchangeRateDao] instance
+     * @param database the database instance
+     * @param the [ExchangeRateDao] instance
+     */
+    @Provides
+    @Singleton
+    fun provideExchangeRateDao(database: AppDatabase): ExchangeRateDao {
+        return database.exchangeRateDao()
     }
 }

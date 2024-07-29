@@ -1,6 +1,7 @@
 package com.example.budgetapp.domain.repository
 
 import com.example.budgetapp.domain.model.Account
+import com.example.budgetapp.domain.model.ExchangeRate
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -18,3 +19,6 @@ interface Repository<T> {
 
 /** Interface for handling [Account] entities */
 interface AccountsRepository : Repository<Account>
+
+/** Interface for handling [ExchangeRate] entities */
+interface ExchangeRatesRepository : Repository<ExchangeRate>

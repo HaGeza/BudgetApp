@@ -2,8 +2,11 @@ package com.example.budgetapp.data.repository
 
 import com.example.budgetapp.data.dao.AccountDao
 import com.example.budgetapp.data.dao.BaseDao
+import com.example.budgetapp.data.dao.ExchangeRateDao
 import com.example.budgetapp.domain.model.Account
+import com.example.budgetapp.domain.model.ExchangeRate
 import com.example.budgetapp.domain.repository.AccountsRepository
+import com.example.budgetapp.domain.repository.ExchangeRatesRepository
 import com.example.budgetapp.domain.repository.Repository
 import javax.inject.Inject
 
@@ -22,3 +25,7 @@ abstract class LocalRepository<T>(
 class LocalAccountsRepository @Inject constructor(
     dao: AccountDao
 ) : LocalRepository<Account>(dao), AccountsRepository
+
+class LocalExchangeRatesRepository @Inject constructor(
+    dao: ExchangeRateDao
+) : LocalRepository<ExchangeRate>(dao), ExchangeRatesRepository

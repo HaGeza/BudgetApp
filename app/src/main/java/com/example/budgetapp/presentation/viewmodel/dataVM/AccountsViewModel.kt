@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 /**
  * ViewModel for CRUD operation on accounts, mapping between [AccountUI] and [Account]
- * @param repository - Repository to use for data operations
+ * @param repository Repository to use for data operations
  */
 @HiltViewModel
 class AccountsViewModel @Inject constructor(
