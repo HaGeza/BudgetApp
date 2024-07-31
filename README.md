@@ -1,8 +1,13 @@
 # Budget App (WIP)
 
-This is a an Android application for tracking finances, written in [Kotlin](https://kotlinlang.org/) with [Jetpack Compose](https://developer.android.com/develop/ui/compose). The
-project uses a MVVM architecture and mostly follows the [Clean Architecture](https://developer.android.com/topic/architecture) principles. The app is
+This is a an Android application for tracking finances, written in [Kotlin](https://kotlinlang.org/)
+with [Jetpack Compose](https://developer.android.com/develop/ui/compose). The
+project uses a MVVM architecture and mostly follows
+the [Clean Architecture](https://developer.android.com/topic/architecture) principles. The app is
 still in development and is not yet ready for use.
+
+Various helper scripts can be found
+in [BudgetAppScripts](https://github.com/HaGeza/BudgetAppScripts).
 
 ## Features
 

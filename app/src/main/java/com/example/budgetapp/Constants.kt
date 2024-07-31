@@ -4,6 +4,7 @@ class Constants {
     companion object {
         // Database
         const val DATABASE_NAME = "budgetapp_database"
+        const val DATABASE_VERSION = 1
         const val ACCOUNTS_TABLE = "accounts"
         const val EXCHANGE_RATE_TABLE = "exchange_rates"
 

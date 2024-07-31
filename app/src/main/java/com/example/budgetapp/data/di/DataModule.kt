@@ -1,8 +1,10 @@
 package com.example.budgetapp.data.di
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import com.example.budgetapp.Constants.Companion.DATABASE_NAME
+import com.example.budgetapp.Constants.Companion.DATABASE_VERSION
 import com.example.budgetapp.data.dao.AccountDao
 import com.example.budgetapp.data.dao.ExchangeRateDao
 import com.example.budgetapp.data.database.AppDatabase
@@ -11,6 +13,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.io.IOException
 import javax.inject.Singleton
 
 /** Module that provides the database and dao instances */
@@ -25,11 +28,25 @@ class DataModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(
+        val databaseFile = context.getDatabasePath(DATABASE_NAME)
+        val builder = Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             DATABASE_NAME
-        ).build()
+        )
+
+        if (!databaseFile.exists()) {
+            val assetPath = "database/AppDatabase_${DATABASE_VERSION}.db"
+            try {
+                context.assets.open(assetPath).use {
+                    builder.createFromAsset(assetPath)
+                }
+            } catch (e: IOException) {
+                Log.w("DataModule", "Asset file does not exist: $assetPath")
+            }
+        }
+
+        return builder.build()
     }
 
     /**

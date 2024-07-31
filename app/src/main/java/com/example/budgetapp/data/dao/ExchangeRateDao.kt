@@ -23,9 +23,10 @@ interface ExchangeRateDao : BaseDao<ExchangeRate> {
     /**
      * Get an exchange rate by the source currency
      * @param source The source currency of the exchange rate to get
+     * @param other The other currency of the exchange rate to get
      */
-    @Query("SELECT * FROM exchange_rates WHERE source = :source")
-    fun getBySource(source: String): Flow<ExchangeRate?>
+    @Query("SELECT * FROM exchange_rates WHERE source = :source AND other = :other")
+    fun getByCurrencies(source: String, other: String): Flow<ExchangeRate?>
 
     @Insert
     suspend fun insertAll(exchangeRates: List<ExchangeRate>)
