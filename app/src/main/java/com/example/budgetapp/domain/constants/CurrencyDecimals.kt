@@ -1,7 +1,7 @@
 package com.example.budgetapp.domain.constants
 
 object CurrencyDecimals {
-    val CURRENCIES_DECIMALS = mapOf<String, UInt>(
+    val CURRENCY_DECIMALS = mapOf<String, UInt>(
         "AED" to 2U,
         "AFN" to 2U,
         "ALL" to 2U,
@@ -21,7 +21,6 @@ object CurrencyDecimals {
         "BMD" to 2U,
         "BND" to 2U,
         "BOB" to 2U,
-        "BOV" to 2U,
         "BRL" to 2U,
         "BSD" to 2U,
         "BTN" to 2U,
@@ -30,9 +29,7 @@ object CurrencyDecimals {
         "BZD" to 2U,
         "CAD" to 2U,
         "CDF" to 2U,
-        "CHE" to 2U,
         "CHF" to 2U,
-        "CHW" to 2U,
         "CLF" to 4U,
         "CLP" to 0U,
         "CNY" to 2U,
@@ -128,7 +125,6 @@ object CurrencyDecimals {
         "SLE" to 2U,
         "SOS" to 2U,
         "SRD" to 2U,
-        "SSP" to 2U,
         "SVC" to 2U,
         "SYP" to 2U,
         "SZL" to 2U,
@@ -144,17 +140,13 @@ object CurrencyDecimals {
         "UAH" to 2U,
         "UGX" to 0U,
         "USD" to 2U,
-        "USN" to 2U,
-        "UYI" to 0U,
         "UYU" to 2U,
-        "UYW" to 4U,
         "UZS" to 2U,
         "VED" to 2U,
         "VES" to 2U,
         "VND" to 0U,
         "VUV" to 0U,
         "WST" to 2U,
-        "XAF" to 0U,
         "XCD" to 2U,
         "XOF" to 0U,
         "XPF" to 0U,

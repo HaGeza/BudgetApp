@@ -1,5 +1,6 @@
 package com.example.budgetapp.presentation.viewmodel.dataVM
 
+import androidx.test.filters.SmallTest
 import com.example.budgetapp.domain.model.Account
 import com.example.budgetapp.domain.repository.AccountsRepository
 import com.example.budgetapp.presentation.viewmodel.uimodel.AccountUI
@@ -9,6 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import java.util.Currency
 
+@SmallTest
 class AccountsViewModelTest {
     private lateinit var accountsViewModel: AccountsViewModel
     private lateinit var presentationAccount: AccountUI
@@ -19,16 +21,16 @@ class AccountsViewModelTest {
     fun setUp() {
         accountsViewModel = AccountsViewModel(mockRepository)
         presentationAccount = AccountUI(
-            id = 1,
             name = "Account A",
             balance = "100.00",
-            currency = "USD"
+            currency = "USD",
+            id = 1,
         )
         domainAccount = Account(
-            id = 1,
             name = "Account B",
             balance = "230.50".toBigDecimal(),
-            currency = Currency.getInstance("USD")
+            currency = Currency.getInstance("USD"),
+            id = 1,
         )
     }
 

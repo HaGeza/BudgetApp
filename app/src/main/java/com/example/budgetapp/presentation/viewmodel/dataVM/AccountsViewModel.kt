@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 /**
  * ViewModel for CRUD operation on accounts, mapping between [AccountUI] and [Account]
- * @param repository - Repository to use for data operations
+ * @param repository Repository to use for data operations
  */
 @HiltViewModel
 class AccountsViewModel @Inject constructor(
@@ -39,7 +39,7 @@ class AccountsViewModel @Inject constructor(
     @Throws(IllegalArgumentException::class)
     override fun domainToPresentation(domain: Account): AccountUI {
         val currency = domain.currency.currencyCode
-        val decimals = CurrencyDecimals.CURRENCIES_DECIMALS.get(currency)
+        val decimals = CurrencyDecimals.CURRENCY_DECIMALS.get(currency)
             ?: throw IllegalArgumentException("Currency not found: $currency")
         val balance = domain.balance.setScale(decimals.toInt(), RoundingMode.FLOOR).toString()
 

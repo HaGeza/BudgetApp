@@ -55,8 +55,8 @@ fun AccountsScreenContent(
 fun AccountScreenContentPreview() {
     AccountsScreenContent(
         accounts = listOf(
-            AccountUI(1, "Account 1", "105.00", "USD"),
-            AccountUI(2, "Account 2", "200.99", "USD")
+            AccountUI("Account 1", "105.00", "USD", 1),
+            AccountUI("Account 2", "200.99", "USD", 2)
         ), Modifier
     )
 }

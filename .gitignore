@@ -61,3 +61,6 @@ fastlane/readme.md
 
 # Mac
 .DS_Store
+
+# DB Assets
+app/src/main/assets/database/*.db

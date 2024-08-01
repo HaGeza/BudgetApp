@@ -3,7 +3,7 @@ package com.example.budgetapp.data.dao
 import androidx.test.filters.SmallTest
 import com.example.budgetapp.data.database.AppDatabase
 import com.example.budgetapp.data.di.DataModule
-import com.example.budgetapp.domain.model.Account
+import com.example.budgetapp.domain.model.ExchangeRate
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -14,35 +14,32 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.math.BigDecimal
 import java.util.Currency
 import javax.inject.Inject
 
 @HiltAndroidTest
 @UninstallModules(DataModule::class)
 @SmallTest
-class AccountDaoTest {
+class ExchangeRateDaoTest {
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
     lateinit var db: AppDatabase
 
-    private lateinit var dao: AccountDao
-    private val account1 = Account(
-        "Account 1", BigDecimal("100.00"), Currency.getInstance("USD"), 1
-    )
-    private val account2 = Account(
-        "Account 2", BigDecimal("200.00"), Currency.getInstance("EUR"), 2
-    )
+    private lateinit var dao: ExchangeRateDao
+    private val usd = Currency.getInstance("USD")
+    private val eur = Currency.getInstance("EUR")
+    private val exchangeRate1 = ExchangeRate(usd, eur, 0.85, 1)
+    private val exchangeRate2 = ExchangeRate(eur, usd, 1.18, 2)
 
     @Before
     fun setUp() = runTest {
         hiltRule.inject()
-        dao = db.accountDao()
+        dao = db.exchangeRateDao()
 
-        dao.insert(account1)
-        dao.insert(account2)
+        dao.insert(exchangeRate1)
+        dao.insert(exchangeRate2)
     }
 
     @After
@@ -52,8 +49,8 @@ class AccountDaoTest {
 
     @Test
     fun `getById finds existing ids`() = runTest {
-        assert(dao.getById(1).first() == account1)
-        assert(dao.getById(2).first() == account2)
+        assert(dao.getById(1).first() == exchangeRate1)
+        assert(dao.getById(2).first() == exchangeRate2)
     }
 
     @Test
@@ -65,7 +62,18 @@ class AccountDaoTest {
     fun `getAll returns all accounts`() = runTest {
         val accounts = dao.getAll().first()
         assert(accounts.size == 2)
-        assert(accounts.contains(account1))
-        assert(accounts.contains(account2))
+        assert(accounts.contains(exchangeRate1))
+        assert(accounts.contains(exchangeRate2))
+    }
+
+    @Test
+    fun `getBySource finds correct item`() = runTest {
+        assert(dao.getBySource("USD").first() == exchangeRate1)
+        assert(dao.getBySource("EUR").first() == exchangeRate2)
+    }
+
+    @Test
+    fun `getBySource returns null for non-existing source`() = runTest {
+        assertNull(dao.getBySource("GBP").first())
     }
 }
