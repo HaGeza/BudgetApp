@@ -12,6 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class ExchangeRateCalculatorModule {
+    /** Provides the [ExchangeRateCalculator] instance */
     @Provides
     @Singleton
     fun provideExchangeRateCalculator(exchangeRateDao: ExchangeRateDao): ExchangeRateCalculator {

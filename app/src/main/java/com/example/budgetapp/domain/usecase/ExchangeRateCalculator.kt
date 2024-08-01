@@ -15,7 +15,8 @@ class ExchangeRateCalculator @Inject constructor(private val exchangeRateDao: Ex
     val baseCurrency = Currency.getInstance(BASE_CURRENCY_CODE)
 
     /**
-     * Calculate the exchange rate between two currencies
+     * Calculate the exchange rate between two currencies. Throws an [IllegalArgumentException] if [ExchangeRate]s
+     * for `soure` or `other` to [BASE_CURRENCY_CODE] are not found in the database.
      * @param exchangeRate Describes the source and other currencies that the rate should be calculated for
      * @return The exchange rate between the two currencies
      */

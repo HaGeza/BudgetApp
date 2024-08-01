@@ -10,7 +10,7 @@ import java.util.Currency
 /**
  * Model class for exchange rates, from `source` to `final` currency
  * @param source The source currency
- * @param final The final currency
+ * @param other The final currency
  * @param rate The exchange rate
  * @param id The id of the exchange rate
  * */
