@@ -26,6 +26,7 @@ class LocalAccountsRepository @Inject constructor(
     dao: AccountDao
 ) : LocalRepository<Account>(dao), AccountsRepository
 
+/** Local repository for exchange rates */
 class LocalExchangeRatesRepository @Inject constructor(
     dao: ExchangeRateDao
 ) : LocalRepository<ExchangeRate>(dao), ExchangeRatesRepository

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Interface for a generic repository
- * @param <T> - the type of entity the repository handles
+ * @param <T> the type of entity the repository handles
  */
 interface Repository<T> {
     fun getAll(): Flow<List<T>>
