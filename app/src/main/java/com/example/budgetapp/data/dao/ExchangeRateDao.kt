@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.budgetapp.domain.model.ExchangeRate
+import com.example.budgetapp.Constants.Companion.BASE_CURRENCY_CODE
 import kotlinx.coroutines.flow.Flow
 
 /** Data Access Objecct for the exchange rates table */
@@ -21,12 +22,11 @@ interface ExchangeRateDao : BaseDao<ExchangeRate> {
     override fun getById(id: Int): Flow<ExchangeRate?>
 
     /**
-     * Get an exchange rate by the source currency
+     * Get an exchange rate from `source` to currency with [BASE_CURRENCY_CODE]
      * @param source The source currency of the exchange rate to get
-     * @param other The other currency of the exchange rate to get
      */
-    @Query("SELECT * FROM exchange_rates WHERE source = :source AND other = :other")
-    fun getByCurrencies(source: String, other: String): Flow<ExchangeRate?>
+    @Query("SELECT * FROM exchange_rates WHERE source = :source")
+    fun getBySource(source: String): Flow<ExchangeRate?>
 
     @Insert
     suspend fun insertAll(exchangeRates: List<ExchangeRate>)
