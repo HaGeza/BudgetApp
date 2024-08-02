@@ -46,10 +46,6 @@ class SearchableSpinnerKtTest {
         }
     }
 
-    fun changeSearchText(text: String) {
-
-    }
-
     @Test
     fun `options are filtered on text change`() {
         val searchBar = composeRule.onNodeWithText(dropdownText)

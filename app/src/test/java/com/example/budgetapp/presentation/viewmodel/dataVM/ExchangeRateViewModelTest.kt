@@ -1,7 +1,7 @@
 package com.example.budgetapp.presentation.viewmodel.dataVM
 
 import androidx.test.filters.SmallTest
-import com.example.budgetapp.MainDispatcherRule
+import com.example.budgetapp.TestDispatcherRule
 import com.example.budgetapp.assertExchangeRatesEqual
 import com.example.budgetapp.domain.model.ExchangeRate
 import com.example.budgetapp.domain.repository.ExchangeRatesRepository
@@ -20,7 +20,7 @@ import java.util.Currency
 @SmallTest
 class ExchangeRateViewModelTest {
     @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
+    val mainDispatcherRule = TestDispatcherRule()
 
     private lateinit var exchangeRateViewModel: ExchangeRateViewModel
     private lateinit var presentationExchangeRate: ExchangeRateUI

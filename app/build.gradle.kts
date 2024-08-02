@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("org.sonarqube") version "5.1.0.4882"
+    id("jacoco")
 }
 
 android {
@@ -32,12 +33,27 @@ android {
     }
 
     buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
         release {
+            enableUnitTestCoverage = false
+            enableAndroidTestCoverage = false
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+    tasks {
+        withType<Test> {
+            configure<JacocoTaskExtension> {
+                isIncludeNoLocationClasses = true
+                excludes = listOf("jdk.internal.*")
+            }
         }
     }
     compileOptions {
@@ -127,10 +143,86 @@ kapt {
     correctErrorTypes = true
 }
 
+val jacocoXmlPath = layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml")
+
 sonar {
     properties {
         property("sonar.projectKey", "HaGeza_BudgetApp")
         property("sonar.organization", "hageza")
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.sources", "src/main/java")
+        property(
+            "sonar.tests",
+            "src/test/java,src/androidTest/java"
+        )
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths",
+            jacocoXmlPath.get()
+        )
     }
+}
+
+
+val reportFormat: String by project
+tasks.register<JacocoReport>("jacocoDebugTestReport") {
+    dependsOn(listOf("testDebugUnitTest", "createDebugCoverageReport"))
+    reports {
+        if (reportFormat == "xml") {
+            html.required.set(false)
+            xml.required.set(true)
+            xml.outputLocation.set(jacocoXmlPath.get())
+        } else {
+            html.required.set(true)
+            xml.required.set(false)
+        }
+    }
+    group = "Verification"
+    description =
+        "Execute unit and instrumentation tests, generate and combine Jacoco coverage report"
+
+    val exclusions = listOf(
+        // Resources
+        "**/R.class",
+        "**/R$*.class",
+        // Generated code
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        // Tests
+        "**/*Test*.*",
+        "**/test/**",
+        "**/androidTest/**",
+        // DI
+        "**/di/*Module*.*",
+        // Database
+        "**/database/*Database*.*",
+        // Constants
+        "**/constants/**/*.*",
+        // UI
+        "**/ui.theme/**/*.*",
+        // Previews
+        "**/*Preview*.*",
+    )
+    // Set source directories to the main source directory
+    sourceDirectories.setFrom(
+        files(
+            "src/main/java",
+            "src/main/kotlin"
+        )
+    )
+    // Set class directories to compiled Java and Kotlin classes, excluding specified exclusions
+    classDirectories.setFrom(files(
+        fileTree(layout.buildDirectory.dir("intermediates/javac/")) {
+            exclude(exclusions)
+        },
+        fileTree(layout.buildDirectory.dir("tmp/kotlin-classes/debug")) {
+            exclude(exclusions)
+        }
+    ))
+
+    executionData.setFrom(files(
+        fileTree(layout.buildDirectory) {
+            include("**/*.exec")
+            include("**/*.ec")
+        }
+    ))
 }
