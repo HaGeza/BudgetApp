@@ -23,6 +23,7 @@ navigationFragmentKtxVersion = "2.8.0-beta05"
 navigationTesting = "2.8.0-beta05"
 navigationUiKtx = "2.8.0-beta05"
 navigationUiVersion = "2.8.0-beta05"
+orgJacocoCore = "0.8.11"
 roomCommon = "2.6.1"
 roomCompiler = "2.6.1"
 roomKtx = "2.6.1"
@@ -67,6 +68,7 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockkAndroid" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockkAndroid" }
 navigation-ui-v280beta04 = { module = "androidx.navigation:navigation-ui", version.ref = "navigationUiVersion" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+org-jacoco-core = { module = "org.jacoco:org.jacoco.core", version.ref = "orgJacocoCore" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }

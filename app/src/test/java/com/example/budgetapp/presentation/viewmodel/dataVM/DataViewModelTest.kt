@@ -1,7 +1,7 @@
 package com.example.budgetapp.presentation.viewmodel.dataVM
 
 import androidx.test.filters.SmallTest
-import com.example.budgetapp.MainDispatcherRule
+import com.example.budgetapp.TestDispatcherRule
 import com.example.budgetapp.domain.repository.Repository
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -32,7 +32,7 @@ class TestDataViewModel(repository: Repository<DomainModel>) :
 @SmallTest
 class DataViewModelTest {
     @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
+    val mainDispatcherRule = TestDispatcherRule()
 
     private lateinit var dataViewModel: TestDataViewModel
     private val mockRepository = mockk<Repository<DomainModel>>()
